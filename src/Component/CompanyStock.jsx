@@ -1,57 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { lucas } from "../Context/LucasContext";
 import search from "../assets/icons/search.png";
-import * as XLSX from "xlsx";
+import { useParams } from "react-router-dom";
 
-const BoschStock = () => {
-  const [allData, setAllData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
+const CompanyStock = () => {
+  const { id } = useParams();
+
   const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    const readExcel = async () => {
-      const res = await fetch("/BOSCH_STOCK1.xlsx");
-      const buffer = await res.arrayBuffer();
-
-      const workbook = XLSX.read(buffer, { type: "array" });
-      let temp = [];
-      console.log(workbook);
-      
-      
-
-      workbook.SheetNames.forEach((sheetName) => {
-        const sheet = workbook.Sheets[sheetName];
-        
-        
-        const rows = XLSX.utils.sheet_to_json(sheet, {
-          header: 1,
-          defval: "",
-          blankrows: false,
-        });
-
-        for (let i = 1; i < rows.length; i++) {
-          const row = rows[i];
-          if (!row[1]) continue;
-
-          temp.push({
-            sno: temp.length + 1,
-            part: String(row[1]).trim(),
-            item: String(row[2]).trim(),
-            desc: String(row[3]).trim(),
-            qty: String(row[4]).trim(),
-            mrp: String(row[5]).trim(),
-            sheet: sheetName,
-          });
-        }
-      });
-
-      setAllData(temp);
-      setFilteredData(temp);
-    };
-
-    readExcel();
-  }, []);
-  
-
+  const [
+    allSheets,
+    filteredSheet,
+    setFilteredSheet,
+    allData,
+    filteredData,
+    setFilteredData,
+  ] = useContext(lucas);
   // 🔍 search logic
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
@@ -61,8 +25,7 @@ const BoschStock = () => {
       (item) =>
         item.part.toLowerCase().includes(value) ||
         item.item.toLowerCase().includes(value) ||
-        item.desc.toLowerCase().includes(value)
-        
+        item.desc.toLowerCase().includes(value),
     );
 
     setFilteredData(filtered);
@@ -72,7 +35,7 @@ const BoschStock = () => {
     <div className="w-full min-h-screen bg-slate-50 flex flex-col gap-8 py-12 px-4 items-center">
       {/* Header */}
       <div className="w-full max-w-4xl bg-white rounded-xl px-6 py-5 shadow-[0_10px_30px_rgba(15,23,42,0.12)]">
-        <h1 className="text-2xl font-semibold text-slate-900">Bosch Stock</h1>
+        <h1 className="text-2xl font-semibold text-slate-900">{id}</h1>
         <p className="text-sm text-slate-500 mt-1">Inventory Search</p>
       </div>
 
@@ -84,8 +47,8 @@ const BoschStock = () => {
 
         <div
           className="flex items-center gap-2 rounded-lg border border-slate-300 px-3
-                        focus-within:border-slate-900
-                        focus-within:ring-2 focus-within:ring-slate-900/20"
+                            focus-within:border-slate-900
+                            focus-within:ring-2 focus-within:ring-slate-900/20"
         >
           <img className="w-5 opacity-60" src={search} alt="" />
 
@@ -108,7 +71,7 @@ const BoschStock = () => {
         <div
           key={index}
           className="w-full max-w-4xl bg-white rounded-xl px-6 py-5
-                     shadow-[0_10px_30px_rgba(15,23,42,0.12)]"
+                         shadow-[0_10px_30px_rgba(15,23,42,0.12)]"
         >
           <div className="flex justify-between items-center pb-4 border-b border-slate-200">
             <h1 className="text-lg font-medium text-blue-700 tracking-wide">
@@ -152,4 +115,4 @@ const BoschStock = () => {
   );
 };
 
-export default BoschStock;
+export default CompanyStock;

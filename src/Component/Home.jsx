@@ -21,7 +21,7 @@ const Home = () => {
               <h1 className="text-lg font-medium">Bosch </h1>
             </div>
           </Link>
-          <Link to={"/LucasStock"}>
+          <Link to={"/Companies"}>
             <div className="border py-10 px-10 rounded-2xl bg-linear-to-br from-slate-100 to-slate-200 cursor-pointer">
               <h1 className="text-lg font-medium">Lucas <br /> and other...</h1>
             </div>
