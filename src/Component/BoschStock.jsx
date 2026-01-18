@@ -69,7 +69,7 @@ const BoschStock = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-slate-50 flex flex-col gap-8 py-8 px-4 items-center">
+    <div className="w-full min-h-screen bg-slate-50 flex flex-col gap-8 py-15 px-4 items-center">
       {/* Header */}
       <div className="w-full max-w-4xl bg-white rounded-xl px-6 py-5 shadow-[0_10px_30px_rgba(15,23,42,0.12)]">
         <h1 className="text-2xl font-semibold text-slate-900">Bosch Stock</h1>
