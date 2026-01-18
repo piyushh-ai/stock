@@ -25,7 +25,7 @@ const Companies = () => {
     setQuery(value);
 
     if (value === "") {
-      setFilteredSheet(allSheets); // 🌊 wapas puri list
+      setFilteredSheet(allSheets); 
       return;
     }
 
