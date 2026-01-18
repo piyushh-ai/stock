@@ -21,7 +21,7 @@ const CompanyStock = () => {
     const value = e.target.value.toLowerCase();
     setQuery(value);
 
-    const filtered = allData.filter(
+    const filtered = filteredData.filter(
       (item) =>
         item.part.toLowerCase().includes(value) ||
         item.item.toLowerCase().includes(value) ||
