@@ -106,47 +106,55 @@ const BoschStock = () => {
 
       {filteredData.map((item, index) => (
         <div
-          key={index}
-          className="w-full max-w-4xl bg-white rounded-xl px-6 py-5
-                     shadow-[0_10px_30px_rgba(15,23,42,0.12)]"
-        >
-          <div className="flex justify-between items-center pb-4 border-b border-slate-200">
-            <h1 className="text-lg font-medium text-blue-700 tracking-wide">
-              {item.part}
-            </h1>
+  key={index}
+  className="w-full max-w-4xl bg-white rounded-xl px-4 sm:px-6 py-5
+             shadow-[0_10px_30px_rgba(15,23,42,0.12)] overflow-hidden"
+>
+  {/* TOP ROW */}
+  <div className="flex justify-between items-start gap-4 pb-4 border-b border-slate-200">
+    <h1 className="text-base sm:text-lg font-medium text-blue-700 tracking-wide break-words min-w-0">
+      {item.part}
+    </h1>
 
-            <div className="text-right">
-              <p className="text-xs tracking-widest text-slate-400">QUANTITY</p>
-              <h1 className="text-2xl font-semibold text-slate-900">
-                {item.qty}
-              </h1>
-            </div>
-          </div>
+    <div className="text-right shrink-0">
+      <p className="text-xs tracking-widest text-slate-400">QUANTITY</p>
+      <h1 className="text-xl sm:text-2xl font-semibold text-slate-900">
+        {item.qty}
+      </h1>
+    </div>
+  </div>
 
-          <div className="flex justify-between items-center py-4 border-b border-slate-200">
-            <div>
-              <p className="text-xs tracking-widest text-slate-400">ITEM</p>
-              <h1 className="text-lg w-[14rem] whitespace-normal break-words font-medium  text-slate-900">
-                {item.item}
-              </h1>
-              <p className="text-sm text-slate-500 mt-1">{item.desc}</p>
-            </div>
+  {/* MIDDLE ROW */}
+  <div className="flex justify-between items-start gap-4 py-4 border-b border-slate-200">
+    <div className="min-w-0">
+      <p className="text-xs tracking-widest text-slate-400">ITEM</p>
 
-            <div className="text-right">
-              <p className="text-lg tracking-widest text-slate-400">Mrp</p>
-              <h1 className="text-xl font-medium text-slate-900">
-                {item.mrp ? `₹${item.mrp}` : "null"}
-              </h1>
-            </div>
-          </div>
+      <h1 className="text-base sm:text-lg font-medium text-slate-900 break-words">
+        {item.item}
+      </h1>
 
-          <div className="flex items-center justify-between pt-3">
-            <span className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-medium">
-              {item.sheet}
-            </span>
-            <span className="text-xs text-slate-400">#{item.sno}</span>
-          </div>
-        </div>
+      <p className="text-sm text-slate-500 mt-1 break-words">
+        {item.desc}
+      </p>
+    </div>
+
+    <div className="text-right shrink-0">
+      <p className="text-xs tracking-widest text-slate-400">MRP</p>
+      <h1 className="text-lg sm:text-xl font-medium text-slate-900">
+        {item.mrp ? `₹${item.mrp}` : "—"}
+      </h1>
+    </div>
+  </div>
+
+  {/* BOTTOM ROW */}
+  <div className="flex flex-wrap items-center justify-between gap-2 pt-3">
+    <span className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-medium break-words">
+      {item.sheet}
+    </span>
+    <span className="text-xs text-slate-400">#{item.sno}</span>
+  </div>
+</div>
+
       ))}
     </div>
   );
