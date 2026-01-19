@@ -25,24 +25,29 @@ const Companies = () => {
   };
   setFilteredData(sheetData);
 
-  setFilteredSheet(allSheets)
+  useEffect(() => {
+    setFilteredSheet(allSheets)
+  }, [allSheets])
   
 
+  
+  
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setQuery(value);
-
+    
     if (value === "") {
       setFilteredSheet(allSheets);
       return;
     }
-
+    
     const searched = allSheets.filter((item) =>
       item.toLowerCase().includes(value),
-    );
+  );
+  
+  setFilteredSheet(searched);
+};
 
-    setFilteredSheet(searched);
-  };
 
   return (
     <div className="w-full min-h-screen bg-slate-50 flex flex-col gap-8 py-15 px-4 items-center">
