@@ -24,6 +24,8 @@ const Companies = () => {
     setSheetData(data);
   };
   setFilteredData(sheetData);
+
+  setFilteredSheet(allSheets)
   
 
   const handleSearch = (e) => {
