@@ -126,7 +126,7 @@ const BoschStock = () => {
           <div className="flex justify-between items-center py-4 border-b border-slate-200">
             <div>
               <p className="text-xs tracking-widest text-slate-400">ITEM</p>
-              <h1 className="text-lg font-medium uppercase text-slate-900">
+              <h1 className="text-lg w-[14rem] whitespace-normal break-words font-medium  text-slate-900">
                 {item.item}
               </h1>
               <p className="text-sm text-slate-500 mt-1">{item.desc}</p>
