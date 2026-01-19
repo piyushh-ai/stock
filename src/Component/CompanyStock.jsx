@@ -20,6 +20,11 @@ const CompanyStock = () => {
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setQuery(value);
+     // agar input empty hai → pura data wapas
+  if (value === "") {
+    setFilteredData(allData);
+    return;
+  }
 
     const filtered = filteredData.filter(
       (item) =>
