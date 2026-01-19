@@ -94,14 +94,14 @@ const CompanyStock = () => {
           <div className="flex justify-between items-center py-4 border-b border-slate-200">
             <div>
               <p className="text-xs tracking-widest text-slate-400">ITEM</p>
-              <h1 className="text-lg w-[14rem] whitespace-normal break-words font-medium  text-slate-900">
+              <h1 className="text-lg w-[12rem] whitespace-normal break-words font-medium  text-slate-900">
                 {item.item}
               </h1>
 
               <p className="text-sm text-slate-500 mt-1">{item.desc}</p>
             </div>
 
-            <div className="text-right">
+            <div className="text-right w-[5rem] whitespace-normal break-words">
               <p className="text-lg tracking-widest text-slate-400">Mrp</p>
               <h1 className="text-xl font-medium text-slate-900">
                 {item.mrp ? `₹${item.mrp}` : "null"}
