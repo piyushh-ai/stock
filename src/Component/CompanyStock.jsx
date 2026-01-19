@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { lucas } from "../Context/LucasContext";
 import search from "../assets/icons/search.png";
 import { useParams } from "react-router-dom";
@@ -16,17 +16,24 @@ const CompanyStock = () => {
     filteredData,
     setFilteredData,
   ] = useContext(lucas);
-  // 🔍 search logic
+
+  useEffect(() => {
+    const data = allData.filter((item) => item.sheet === id);
+    setFilteredData(data);
+  }, [id, allData]);
+
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setQuery(value);
-    // agar input empty hai → pura data wapas
+
+    const baseData = allData.filter((item) => item.sheet === id);
+
     if (value === "") {
-      setFilteredData(allData);
+      setFilteredData(baseData);
       return;
     }
 
-    const filtered = filteredData.filter(
+    const filtered = baseData.filter(
       (item) =>
         item.part.toLowerCase().includes(value) ||
         item.item.toLowerCase().includes(value) ||

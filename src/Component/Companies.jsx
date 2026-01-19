@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import search from "../assets/icons/search.png";
 import * as XLSX from "xlsx";
 import { lucas } from "../Context/LucasContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Companies = () => {
   const [
@@ -14,18 +14,24 @@ const Companies = () => {
     setFilteredData,
   ] = useContext(lucas);
   const [query, setQuery] = useState("");
+  
+
+
+  const [sheetData, setSheetData] = useState(null);
 
   const handleGetStock = (sheetName) => {
     const data = allData.filter((item) => item.sheet === sheetName);
-    setFilteredData(data);
+    setSheetData(data);
   };
+  setFilteredData(sheetData);
+  
 
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setQuery(value);
 
     if (value === "") {
-      setFilteredSheet(allSheets); 
+      setFilteredSheet(allSheets);
       return;
     }
 
