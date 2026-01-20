@@ -7,6 +7,7 @@ const BoschStock = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState("");
 
+  // 📦 Excel load (sirf ek baar)
   useEffect(() => {
     const readExcel = async () => {
       const res = await fetch("/BOSCH_STOCK1.xlsx");
@@ -14,14 +15,10 @@ const BoschStock = () => {
 
       const workbook = XLSX.read(buffer, { type: "array" });
       let temp = [];
-      console.log(workbook);
-      
-      
 
       workbook.SheetNames.forEach((sheetName) => {
         const sheet = workbook.Sheets[sheetName];
-        
-        
+
         const rows = XLSX.utils.sheet_to_json(sheet, {
           header: 1,
           defval: "",
@@ -50,23 +47,29 @@ const BoschStock = () => {
 
     readExcel();
   }, []);
-  
 
-  // 🔍 search logic
-  const handleSearch = (e) => {
-    const value = e.target.value.toLowerCase();
-    setQuery(value);
+  // 🚀 FAST SEARCH (debounced)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!query) {
+        setFilteredData(allData);
+        return;
+      }
 
-    const filtered = allData.filter(
-      (item) =>
-        item.part.toLowerCase().includes(value) ||
-        item.item.toLowerCase().includes(value) ||
-        item.desc.toLowerCase().includes(value)
-        
-    );
+      const value = query.toLowerCase();
 
-    setFilteredData(filtered);
-  };
+      const filtered = allData.filter(
+        (item) =>
+          item.part.toLowerCase().includes(value) ||
+          item.item.toLowerCase().includes(value) ||
+          item.desc.toLowerCase().includes(value)
+      );
+
+      setFilteredData(filtered);
+    }, 300); // ⏳ debounce
+
+    return () => clearTimeout(timer);
+  }, [query, allData]);
 
   return (
     <div className="w-full min-h-screen bg-slate-50 flex flex-col gap-8 py-15 px-4 items-center">
@@ -82,79 +85,58 @@ const BoschStock = () => {
           QUICK SEARCH
         </p>
 
-        <div
-          className="flex items-center gap-2 rounded-lg border border-slate-300 px-3
+        <div className="flex items-center gap-2 rounded-lg border border-slate-300 px-3
                         focus-within:border-slate-900
-                        focus-within:ring-2 focus-within:ring-slate-900/20"
-        >
+                        focus-within:ring-2 focus-within:ring-slate-900/20">
           <img className="w-5 opacity-60" src={search} alt="" />
 
           <input
             className="w-full py-2 outline-none placeholder:text-sm placeholder:text-slate-400"
             type="text"
             value={query}
-            onChange={handleSearch}
+            onChange={(e) => setQuery(e.target.value)}
             placeholder="Search by Part No. or Name"
           />
         </div>
       </div>
 
-      {/* Result Cards */}
+      {/* Result */}
       {filteredData.length === 0 && (
         <p className="text-slate-400 text-sm">No matching stock found 🌫️</p>
       )}
 
       {filteredData.map((item, index) => (
         <div
-  key={index}
-  className="w-full max-w-4xl bg-white rounded-xl px-4 sm:px-6 py-5
-             shadow-[0_10px_30px_rgba(15,23,42,0.12)] overflow-hidden"
->
-  {/* TOP ROW */}
-  <div className="flex justify-between items-start gap-4 pb-4 border-b border-slate-200">
-    <h1 className="text-base sm:text-lg font-medium text-blue-700 tracking-wide break-words min-w-0">
-      {item.part}
-    </h1>
+          key={index}
+          className="w-full max-w-4xl bg-white rounded-xl px-4 sm:px-6 py-5
+                     shadow-[0_10px_30px_rgba(15,23,42,0.12)] overflow-hidden"
+        >
+          {/* TOP */}
+          <div className="flex justify-between items-start gap-4 pb-4 border-b border-slate-200">
+            <h1 className="text-base sm:text-lg font-medium text-blue-700 break-words">
+              {item.part}
+            </h1>
 
-    <div className="text-right shrink-0">
-      <p className="text-xs tracking-widest text-slate-400">QUANTITY</p>
-      <h1 className="text-xl sm:text-2xl font-semibold text-slate-900">
-        {item.qty}
-      </h1>
-    </div>
-  </div>
+            <div className="text-right">
+              <p className="text-xs tracking-widest text-slate-400">QTY</p>
+              <h1 className="text-xl font-semibold">{item.qty}</h1>
+            </div>
+          </div>
 
-  {/* MIDDLE ROW */}
-  <div className="flex justify-between items-start gap-4 py-4 border-b border-slate-200">
-    <div className="min-w-0">
-      <p className="text-xs tracking-widest text-slate-400">ITEM</p>
+          {/* MID */}
+          <div className="py-4 border-b border-slate-200">
+            <h1 className="text-base font-medium">{item.item}</h1>
+            <p className="text-sm text-slate-500 mt-1">{item.desc}</p>
+          </div>
 
-      <h1 className="text-base sm:text-lg font-medium text-slate-900 break-words">
-        {item.item}
-      </h1>
-
-      <p className="text-sm text-slate-500 mt-1 break-words">
-        {item.desc}
-      </p>
-    </div>
-
-    <div className="text-right shrink-0">
-      <p className="text-xs tracking-widest text-slate-400">MRP</p>
-      <h1 className="text-lg sm:text-xl font-medium text-slate-900">
-        {item.mrp ? `₹${item.mrp}` : "—"}
-      </h1>
-    </div>
-  </div>
-
-  {/* BOTTOM ROW */}
-  <div className="flex flex-wrap items-center justify-between gap-2 pt-3">
-    <span className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-medium break-words">
-      {item.sheet}
-    </span>
-    <span className="text-xs text-slate-400">#{item.sno}</span>
-  </div>
-</div>
-
+          {/* BOTTOM */}
+          <div className="flex justify-between pt-3">
+            <span className="bg-slate-100 px-2 py-1 rounded text-xs">
+              {item.sheet}
+            </span>
+            <span className="text-xs text-slate-400">#{item.sno}</span>
+          </div>
+        </div>
       ))}
     </div>
   );

@@ -23,7 +23,12 @@ const Companies = () => {
     const data = allData.filter((item) => item.sheet === sheetName);
     setSheetData(data);
   };
-  setFilteredData(sheetData);
+  useEffect(() => {
+  if (sheetData) {
+    setFilteredData(sheetData);
+  }
+}, [sheetData]);
+
 
   useEffect(() => {
     setFilteredSheet(allSheets)
