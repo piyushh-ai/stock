@@ -45,7 +45,7 @@ const Home = () => {
 
         {/* Footer */}
         <p className="text-center text-sm text-gray-400">
-          Built with care 🤍
+          Discipline. Precision. Control.
         </p>
       </div>
     </div>
