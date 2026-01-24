@@ -1,32 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const Home = () => {
   return (
-    <div
-      className="h-screen w-full px-10 flex flex-col gap-20 
-    justify-center pb-15 items-center"
-    >
-      <div className="flex flex-col items-center ">
-        <h1 className="text-3xl font-medium ">B.K Engineering</h1>
-        <p className="p-1 text-lg font-medium">Inventory</p>
-      </div>
-
-      <div className="flex flex-col justify-center items-center gap-8">
-        <h1 className="text-xl font-medium ">Search By Company</h1>
-        <div className="flex flex-col justify-center items-center gap-5">
-          <Link to={"/BoschStock"}>
-            <div className="border py-10 px-15 rounded-2xl bg-linear-to-br from-slate-100 to-slate-200 cursor-pointer">
-              <h1 className="text-lg font-medium">Bosch </h1>
-            </div>
-          </Link>
-          <Link to={"/Companies"}>
-            <div className="border py-10 px-10 rounded-2xl bg-linear-to-br from-slate-100 to-slate-200 cursor-pointer">
-              <h1 className="text-lg font-medium">Lucas <br /> and other...</h1>
-            </div>
-          </Link>
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-200 px-6">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 flex flex-col gap-10">
+        
+        {/* Header */}
+        <div className="text-center">
+          <h1 className="text-3xl font-semibold tracking-wide">
+            B.K Engineering
+          </h1>
+          <p className="text-gray-500 text-lg mt-1">
+            Inventory Management
+          </p>
         </div>
+
+        {/* Content */}
+        <div className="flex flex-col gap-6">
+          <h2 className="text-center text-xl font-medium text-gray-700">
+            Search By Company
+          </h2>
+
+          <div className="flex flex-col gap-5">
+            {/* Bosch */}
+            <Link to="/BoschStock">
+              <div className="group border border-gray-200 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-lg bg-gradient-to-br from-slate-100 to-slate-200">
+                <h1 className="text-lg font-semibold group-hover:text-blue-600">
+                  Bosch
+                </h1>
+              </div>
+            </Link>
+
+            {/* Others */}
+            <Link to="/Companies">
+              <div className="group border border-gray-200 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-lg bg-gradient-to-br from-slate-100 to-slate-200">
+                <h1 className="text-lg font-semibold group-hover:text-blue-600">
+                  Lucas <br /> & Others
+                </h1>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <p className="text-center text-sm text-gray-400">
+          Built with care 🤍
+        </p>
       </div>
     </div>
   );
