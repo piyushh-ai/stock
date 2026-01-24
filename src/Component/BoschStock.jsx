@@ -50,26 +50,35 @@ const BoschStock = () => {
 
   // 🚀 FAST SEARCH (debounced)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!query) {
-        setFilteredData(allData);
-        return;
-      }
+  const timer = setTimeout(() => {
+    if (!query) {
+      setFilteredData(allData);
+      return;
+    }
 
-      const value = query.toLowerCase();
+    // 🔥 normalize query (lowercase + no spaces)
+    const normalizedQuery = query
+      .toLowerCase()
+      .replace(/\s+/g, "");
 
-      const filtered = allData.filter(
-        (item) =>
-          item.part.toLowerCase().includes(value) ||
-          item.item.toLowerCase().includes(value) ||
-          item.desc.toLowerCase().includes(value)
+    const filtered = allData.filter((item) => {
+      const part = item.part.toLowerCase().replace(/\s+/g, "");
+      const name = item.item.toLowerCase().replace(/\s+/g, "");
+      const desc = item.desc.toLowerCase().replace(/\s+/g, "");
+
+      return (
+        part.includes(normalizedQuery) ||
+        name.includes(normalizedQuery) ||
+        desc.includes(normalizedQuery)
       );
+    });
 
-      setFilteredData(filtered);
-    }, 300); // ⏳ debounce
+    setFilteredData(filtered);
+  }, 300);
 
-    return () => clearTimeout(timer);
-  }, [query, allData]);
+  return () => clearTimeout(timer);
+}, [query, allData]);
+
 
   return (
     <div className="w-full min-h-screen bg-slate-50 flex flex-col gap-8 py-15 px-4 items-center">

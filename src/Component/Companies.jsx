@@ -14,7 +14,7 @@ const Companies = () => {
     setFilteredData,
   ] = useContext(lucas);
   const [query, setQuery] = useState("");
-  
+
 
 
   const [sheetData, setSheetData] = useState(null);
@@ -24,34 +24,44 @@ const Companies = () => {
     setSheetData(data);
   };
   useEffect(() => {
-  if (sheetData) {
-    setFilteredData(sheetData);
-  }
-}, [sheetData]);
+    if (sheetData) {
+      setFilteredData(sheetData);
+    }
+  }, [sheetData]);
 
 
   useEffect(() => {
     setFilteredSheet(allSheets)
   }, [allSheets])
-  
 
-  
-  
+
+
+
   const handleSearch = (e) => {
-    const value = e.target.value.toLowerCase();
-    setQuery(value);
-    
+    const rawValue = e.target.value;
+    setQuery(rawValue);
+
+    // 🔥 normalize user input
+    const value = rawValue
+      .toLowerCase()
+      .replace(/\s+/g, "");
+
     if (value === "") {
       setFilteredSheet(allSheets);
       return;
     }
-    
-    const searched = allSheets.filter((item) =>
-      item.toLowerCase().includes(value),
-  );
-  
-  setFilteredSheet(searched);
-};
+
+    const searched = allSheets.filter((item) => {
+      const normalizedItem = item
+        .toLowerCase()
+        .replace(/\s+/g, "");
+
+      return normalizedItem.includes(value);
+    });
+
+    setFilteredSheet(searched);
+  };
+
 
 
   return (
