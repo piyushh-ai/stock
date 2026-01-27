@@ -49,20 +49,20 @@ const Home = () => {
       <div className="w-full mt-14 overflow-hidden">
         <div className="marquee">
           <div className="marquee-track">
-            <img className="logo" src="/public/company_images/Bosch_logo.png" />
-            <img className="logo" src="/public/company_images/lucas.png" />
-            <img className="logo" src="/public/company_images/nbc.png" />
-            <img className="logo" src="/public/company_images/rmp.png" />
-            <img className="logo" src="/public/company_images/delphi_tvs.png" />
-            <img className="logo" src="/public/company_images/ascot1.png" />
+            <img className="logo" src="/company_images/Bosch_logo.png" />
+            <img className="logo" src="/company_images/lucas.png" />
+            <img className="logo" src="/company_images/nbc.png" />
+            <img className="logo" src="/company_images/rmp.png" />
+            <img className="logo" src="/company_images/delphi_tvs.png" />
+            <img className="logo" src="/company_images/ascot1.png" />
 
             {/* duplicate – SAME track me */}
-            <img className="logo" src="/public/company_images/Bosch_logo.png" />
-            <img className="logo" src="/public/company_images/lucas.png" />
-            <img className="logo" src="/public/company_images/nbc.png" />
-            <img className="logo" src="/public/company_images/rmp.png" />
-            <img className="logo" src="/public/company_images/delphi_tvs.png" />
-            <img className="logo" src="/public/company_images/ascot1.png" />
+            <img className="logo" src="/company_images/Bosch_logo.png" />
+            <img className="logo" src="/company_images/lucas.png" />
+            <img className="logo" src="/company_images/nbc.png" />
+            <img className="logo" src="/company_images/rmp.png" />
+            <img className="logo" src="/company_images/delphi_tvs.png" />
+            <img className="logo" src="/company_images/ascot1.png" />
           </div>
         </div>
       </div>
