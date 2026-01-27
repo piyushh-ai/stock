@@ -55,7 +55,7 @@ const Home = () => {
             <img className="logo" src="/company_images/rmp.png" />
             <img className="logo" src="/company_images/delphi_tvs.png" />
             <img className="logo" src="/company_images/ascot1.png" />
-            <img className="logo" src="/company_images/goodYear.png" />
+            <img className="logo" src="/company_images/gy.png" />
 
 
             {/* duplicate – SAME track me */}
@@ -65,7 +65,7 @@ const Home = () => {
             <img className="logo" src="/company_images/rmp.png" />
             <img className="logo" src="/company_images/delphi_tvs.png" />
             <img className="logo" src="/company_images/ascot1.png" />
-            <img className="logo" src="/company_images/goodYear.png" />
+            <img className="logo" src="/company_images/gy.png" />
 
           </div>
         </div>
