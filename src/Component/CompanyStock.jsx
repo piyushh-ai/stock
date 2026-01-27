@@ -27,6 +27,10 @@ const CompanyStock = () => {
     setFilteredData(baseData);
   }, [baseData]);
 
+  useEffect(() => {
+  window.scrollTo({ top: 0, behavior: "instant" });
+}, [id]);
+
   // 🚀 STEP 3: FAST SEARCH (debounced)
   useEffect(() => {
     // ⚡ backspace ya empty query pe turant data
@@ -58,12 +62,24 @@ const CompanyStock = () => {
 
   return (
     <div className="px-4 pb-10 pt-8">
-      <div className="w-full flex justify-start m-2 mb-4 items-center ">
-        <p className="p-3 bg-[#d6d6d6] rounded-full">
-          <Link to={"/Companies"}>
-            <FaArrowLeft />
-          </Link>
-        </p>
+      <div className="w-full flex justify-start mb-6">
+        <Link
+          to="/Companies"
+          className="
+      flex items-center justify-center
+      w-11 h-11
+      rounded-full
+      bg-white
+      border border-slate-200
+      shadow-sm
+      hover:shadow-md
+      hover:bg-slate-50
+      active:scale-95
+      transition-all duration-200
+    "
+        >
+          <FaArrowLeft className="text-slate-700 text-lg" />
+        </Link>
       </div>
       <div className="w-full min-h-screen bg-slate-50 flex flex-col gap-8 items-center">
         {/* Header */}
