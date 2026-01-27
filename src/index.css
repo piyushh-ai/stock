@@ -21,7 +21,7 @@ shadow{
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 7s linear infinite;
+  animation: marquee 10s linear infinite;
 }
 
 .logo {
