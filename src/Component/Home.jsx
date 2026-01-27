@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-white via-slate-50 to-slate-100">
+    <div className="min-h-screen w-full flex flex-col  items-center justify-center bg-gradient-to-br from-white via-slate-50 to-slate-100">
 
       {/* Main Card */}
-      <div className="w-[92%] max-w-md bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.08)] px-8 py-10 flex flex-col gap-12">
+      <div className="w-[92%] max-w-md mt-5 bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.08)] px-8 py-10 flex flex-col gap-12">
 
         {/* Header */}
         <div className="text-center flex flex-col gap-2">
