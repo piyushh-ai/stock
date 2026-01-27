@@ -21,6 +21,8 @@ shadow{
 .marquee-track {
   display: flex;
   width: max-content;
+  opacity: 0.8;
+  margin-top: 1rem;
   animation: marquee 10s linear infinite;
 }
 
@@ -29,7 +31,7 @@ shadow{
   width: auto;
   flex-shrink: 0;
   object-fit: contain;
-  margin-right: 2rem;
+  margin-right: 2.5rem;
 }
 
 @keyframes marquee {

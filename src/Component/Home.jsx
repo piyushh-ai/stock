@@ -3,73 +3,111 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-linear-to-br from-slate-50 to-slate-200 ">
-      <div className="w-[92%] max-w-md bg-white rounded-3xl shadow-xl p-8 flex flex-col gap-10 ">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-white via-slate-50 to-slate-100">
+
+      {/* Main Card */}
+      <div className="w-[92%] max-w-md bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.08)] px-8 py-10 flex flex-col gap-12">
+
         {/* Header */}
-        <div className="text-center">
-          <h1 className="text-3xl font-semibold tracking-wide">
+        <div className="text-center flex flex-col gap-2">
+          <h1 className="text-3xl font-semibold tracking-wide text-slate-900">
             B.K Engineering
           </h1>
-          <p className="text-gray-500 text-lg mt-1">Inventory Management</p>
+          <div className="h-[2px] w-14 bg-slate-300 mx-auto rounded-full"></div>
+          <p className="text-slate-500 text-base tracking-wide">
+            Inventory Management
+          </p>
         </div>
 
         {/* Content */}
-        <div className="flex flex-col gap-6">
-          <h2 className="text-center text-xl font-medium text-gray-700">
+        <div className="flex flex-col gap-8">
+          <h2 className="text-center text-lg font-medium text-slate-700 tracking-wide">
             Search By Company
           </h2>
 
           <div className="flex flex-col gap-5">
+
             {/* Bosch */}
             <Link to="/BoschStock">
-              <div className="group border border-gray-200 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-lg bg-linear-to-br from-slate-100 to-slate-200">
-                <h1 className="text-lg font-semibold group-hover:text-blue-600">
-                  Bosch
-                </h1>
+              <div className="group relative overflow-hidden rounded-2xl bg-white border border-slate-200 px-6 py-5 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-50 to-white opacity-0 group-hover:opacity-100 transition"></div>
+
+                <div className="relative flex items-center justify-between">
+                  <div>
+                    <h1 className="text-lg font-semibold text-slate-800">
+                      Bosch
+                    </h1>
+                    <p className="text-sm text-slate-500">
+                      Precision Parts
+                    </p>
+                  </div>
+                  <span className="text-slate-400 group-hover:text-slate-700 transition">
+                    →
+                  </span>
+                </div>
               </div>
             </Link>
 
-            {/* Others */}
+            {/* Lucas & Others */}
             <Link to="/Companies">
-              <div className="group border border-gray-200 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-lg bg-linear-to-br from-slate-100 to-slate-200">
-                <h1 className="text-lg font-semibold group-hover:text-blue-600">
-                  Lucas <br /> & Others
-                </h1>
+              <div className="group relative overflow-hidden rounded-2xl bg-white border border-slate-200 px-6 py-5 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-50 to-white opacity-0 group-hover:opacity-100 transition"></div>
+
+                <div className="relative flex items-center justify-between">
+                  <div>
+                    <h1 className="text-lg font-semibold text-slate-800">
+                      Lucas & Others
+                    </h1>
+                    <p className="text-sm text-slate-500">
+                      Multiple Brands
+                    </p>
+                  </div>
+                  <span className="text-slate-400 group-hover:text-slate-700 transition">
+                    →
+                  </span>
+                </div>
               </div>
             </Link>
+
           </div>
         </div>
 
         {/* Footer */}
-        <p className="text-center text-sm text-gray-400">
-          Discipline. Precision. Control.
+        <p className="text-center text-xs tracking-widest text-slate-400">
+          DISCIPLINE · PRECISION · CONTROL
         </p>
       </div>
 
-      <div className="w-full mt-14 overflow-hidden">
+      {/* Trusted Brands Strip */}
+      <div className="w-full mt-10 overflow-hidden">
+        <p className="text-center text-xs text-slate-400 tracking-wider mb-4">
+          TRUSTED BY INDUSTRY BRANDS
+        </p>
+
         <div className="marquee">
-          <div className="marquee-track">
-            <img className="logo" src="/company_images/Bosch_logo.png" />
-            <img className="logo" src="/company_images/lucas.png" />
-            <img className="logo" src="/company_images/nbc.png" />
-            <img className="logo" src="/company_images/rmp.png" />
-            <img className="logo" src="/company_images/delphi_tvs.png" />
-            <img className="logo" src="/company_images/ascot1.png" />
-            <img className="logo" src="/company_images/gy.png" />
+          <div className="marquee-track ">
+            <img className=" logo" src="/company_images/Bosch_logo.png" />
+            <img className=" logo" src="/company_images/lucas.png" />
+            <img className=" logo" src="/company_images/nbc.png" />
+            <img className=" logo" src="/company_images/rmp.png" />
+            <img className=" logo" src="/company_images/delphi_tvs.png" />
+            <img className=" logo" src="/company_images/ascot1.png" />
+            <img className=" logo" src="/company_images/gy.png" />
 
-
-            {/* duplicate – SAME track me */}
-            <img className="logo" src="/company_images/Bosch_logo.png" />
-            <img className="logo" src="/company_images/lucas.png" />
-            <img className="logo" src="/company_images/nbc.png" />
-            <img className="logo" src="/company_images/rmp.png" />
-            <img className="logo" src="/company_images/delphi_tvs.png" />
-            <img className="logo" src="/company_images/ascot1.png" />
-            <img className="logo" src="/company_images/gy.png" />
-
+            {/* duplicate */}
+            <img className=" logo" src="/company_images/Bosch_logo.png" />
+            <img className=" logo" src="/company_images/lucas.png" />
+            <img className=" logo" src="/company_images/nbc.png" />
+            <img className=" logo" src="/company_images/rmp.png" />
+            <img className=" logo" src="/company_images/delphi_tvs.png" />
+            <img className=" logo" src="/company_images/ascot1.png" />
+            <img className=" logo" src="/company_images/gy.png" />
           </div>
         </div>
       </div>
+
     </div>
   );
 };
