@@ -3,6 +3,7 @@ import { lucas } from "../Context/LucasContext";
 import search from "../assets/icons/search.png";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const CompanyStock = () => {
   const { id } = useParams();
@@ -17,6 +18,8 @@ const CompanyStock = () => {
     setFilteredData,
   ] = useContext(lucas);
 
+  const navigate = useNavigate();
+
   // 🧱 STEP 1: sirf is company ka data (memoized)
   const baseData = useMemo(() => {
     return allData.filter((item) => item.sheet === id);
@@ -28,8 +31,8 @@ const CompanyStock = () => {
   }, [baseData]);
 
   useEffect(() => {
-  window.scrollTo({ top: 0, behavior: "instant" });
-}, [id]);
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [id]);
 
   // 🚀 STEP 3: FAST SEARCH (debounced)
   useEffect(() => {
@@ -63,23 +66,23 @@ const CompanyStock = () => {
   return (
     <div className="px-4 pb-10 pt-8">
       <div className="w-full flex justify-start mb-6">
-        <Link
-          to="/Companies"
+        <button
+          onClick={() => navigate(-1)}
           className="
-      flex items-center justify-center
-      w-11 h-11
-      rounded-full
-      bg-white
-      border border-slate-200
-      shadow-sm
-      hover:shadow-md
-      hover:bg-slate-50
-      active:scale-95
-      transition-all duration-200
-    "
+    flex items-center justify-center
+    w-11 h-11
+    rounded-full
+    bg-white
+    border border-slate-200
+    shadow-sm
+    hover:shadow-md
+    hover:bg-slate-50
+    active:scale-95
+    transition-all duration-200
+  "
         >
           <FaArrowLeft className="text-slate-700 text-lg" />
-        </Link>
+        </button>
       </div>
       <div className="w-full min-h-screen bg-slate-50 flex flex-col gap-8 items-center">
         {/* Header */}

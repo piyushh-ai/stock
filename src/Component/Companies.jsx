@@ -3,6 +3,7 @@ import search from "../assets/icons/search.png";
 import { lucas } from "../Context/LucasContext";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Companies = () => {
   const [
@@ -17,6 +18,8 @@ const Companies = () => {
   const [query, setQuery] = useState("");
   const [sheetData, setSheetData] = useState(null);
 
+  const navigate = useNavigate();
+
   const handleGetStock = (sheetName) => {
     const data = allData.filter((item) => item.sheet === sheetName);
     setSheetData(data);
@@ -25,6 +28,7 @@ const Companies = () => {
   useEffect(() => {
     if (sheetData) setFilteredData(sheetData);
   }, [sheetData]);
+
 
   useEffect(() => {
     setFilteredSheet(allSheets);
@@ -50,24 +54,24 @@ const Companies = () => {
   return (
     <div className="px-4 pb-10 pt-8">
       <div className="w-full flex justify-start mb-6">
-  <Link
-    to="/"
-    className="
-      flex items-center justify-center
-      w-11 h-11
-      rounded-full
-      bg-white
-      border border-slate-200
-      shadow-sm
-      hover:shadow-md
-      hover:bg-slate-50
-      active:scale-95
-      transition-all duration-200
-    "
-  >
-    <FaArrowLeft className="text-slate-700 text-lg" />
-  </Link>
-</div>
+        <button
+          onClick={() => navigate(-1)}
+          className="
+    flex items-center justify-center
+    w-11 h-11
+    rounded-full
+    bg-white
+    border border-slate-200
+    shadow-sm
+    hover:shadow-md
+    hover:bg-slate-50
+    active:scale-95
+    transition-all duration-200
+  "
+        >
+          <FaArrowLeft className="text-slate-700 text-lg" />
+        </button>
+      </div>
       <div className="min-h-screen w-full bg-slate-50 flex flex-col items-center ">
         {/* HEADER */}
         <div className=" top-0 z-20 w-full max-w-4xl bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-5">

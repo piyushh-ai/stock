@@ -3,11 +3,14 @@ import search from "../assets/icons/search.png";
 import * as XLSX from "xlsx";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BoschStock = () => {
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState("");
+
+  const navigate = useNavigate();
 
   // 📦 Excel load
   useEffect(() => {
@@ -78,23 +81,23 @@ const BoschStock = () => {
   return (
     <div className="px-4 pb-10 pt-8">
       <div className="w-full flex justify-start mb-6">
-        <Link
-          to="/"
+        <button
+          onClick={() => navigate(-1)}
           className="
-      flex items-center justify-center
-      w-11 h-11
-      rounded-full
-      bg-white
-      border border-slate-200
-      shadow-sm
-      hover:shadow-md
-      hover:bg-slate-50
-      active:scale-95
-      transition-all duration-200
-    "
+    flex items-center justify-center
+    w-11 h-11
+    rounded-full
+    bg-white
+    border border-slate-200
+    shadow-sm
+    hover:shadow-md
+    hover:bg-slate-50
+    active:scale-95
+    transition-all duration-200
+  "
         >
           <FaArrowLeft className="text-slate-700 text-lg" />
-        </Link>
+        </button>
       </div>
       <div className="min-h-screen w-full bg-slate-50 flex flex-col items-center  gap-8">
         {/* HEADER */}
