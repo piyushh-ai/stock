@@ -28,9 +28,9 @@ const CompanyStock = () => {
 
   // 🚀 STEP 3: FAST SEARCH (debounced)
 useEffect(() => {
-  // ⚡ instant response when user deletes text
+  // ⚡ backspace ya empty query pe turant data
   if (!query.trim()) {
-    setFilteredData(allData);
+    setFilteredData(baseData);
     return;
   }
 
@@ -39,9 +39,9 @@ useEffect(() => {
       .toLowerCase()
       .trim()
       .split(/\s+/)
-      .filter(Boolean); // 🚨 empty tokens hata do
+      .filter(Boolean);
 
-    const filtered = allData.filter((item) => {
+    const filtered = baseData.filter((item) => {
       const fields = [
         item.part,
         item.item,
@@ -52,16 +52,17 @@ useEffect(() => {
         fields.some(
           (field) =>
             field.includes(token) ||
-            field.startsWith(token) // 👈 typo recovery
+            field.startsWith(token) // 👈 typo/backspace friendly
         )
       );
     });
 
     setFilteredData(filtered);
-  }, 200); // ⏱ slightly faster
+  }, 200); // thoda fast, thoda zinda
 
   return () => clearTimeout(timer);
-}, [query, allData]);
+}, [query, baseData]);
+
 
 
   return (
