@@ -27,35 +27,41 @@ const CompanyStock = () => {
   }, [baseData]);
 
   // 🚀 STEP 3: FAST SEARCH (debounced)
-  useEffect(() => {
+useEffect(() => {
+  // ⚡ instant response when user deletes text
+  if (!query.trim()) {
+    setFilteredData(allData);
+    return;
+  }
+
   const timer = setTimeout(() => {
-    if (!query) {
-      setFilteredData(baseData);
-      return;
-    }
-
-    // 🔥 normalize query
-    const normalizedQuery = query
+    const tokens = query
       .toLowerCase()
-      .replace(/\s+/g, "");
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean); // 🚨 empty tokens hata do
 
-    const filtered = baseData.filter((item) => {
-      const part = item.part.toLowerCase().replace(/\s+/g, "");
-      const name = item.item.toLowerCase().replace(/\s+/g, "");
-      const desc = item.desc.toLowerCase().replace(/\s+/g, "");
+    const filtered = allData.filter((item) => {
+      const fields = [
+        item.part,
+        item.item,
+        item.desc,
+      ].map((f) => f.toLowerCase());
 
-      return (
-        part.includes(normalizedQuery) ||
-        name.includes(normalizedQuery) ||
-        desc.includes(normalizedQuery)
+      return tokens.every((token) =>
+        fields.some(
+          (field) =>
+            field.includes(token) ||
+            field.startsWith(token) // 👈 typo recovery
+        )
       );
     });
 
     setFilteredData(filtered);
-  }, 300);
+  }, 200); // ⏱ slightly faster
 
   return () => clearTimeout(timer);
-}, [query, baseData]);
+}, [query, allData]);
 
 
   return (
