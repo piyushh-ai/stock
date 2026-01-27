@@ -50,38 +50,41 @@ const BoschStock = () => {
 
   // 🚀 FAST SEARCH (debounced)
 useEffect(() => {
-  const timer = setTimeout(() => {
-    if (!query) {
-      setFilteredData(allData);
-      return;
-    }
+  // ⚡ instant response when user deletes text
+  if (!query.trim()) {
+    setFilteredData(allData);
+    return;
+  }
 
-    // normalize + split query into words
+  const timer = setTimeout(() => {
     const tokens = query
       .toLowerCase()
       .trim()
-      .split(/\s+/);
+      .split(/\s+/)
+      .filter(Boolean); // 🚨 empty tokens hata do
 
     const filtered = allData.filter((item) => {
-      const searchableText = `
-        ${item.part}
-        ${item.item}
-        ${item.desc}
-      `
-        .toLowerCase()
-        .replace(/\s+/g, "");
+      const fields = [
+        item.part,
+        item.item,
+        item.desc,
+      ].map((f) => f.toLowerCase());
 
-      // 🔑 every token must exist somewhere in same item
       return tokens.every((token) =>
-        searchableText.includes(token.replace(/\s+/g, ""))
+        fields.some(
+          (field) =>
+            field.includes(token) ||
+            field.startsWith(token) // 👈 typo recovery
+        )
       );
     });
 
     setFilteredData(filtered);
-  }, 300);
+  }, 200); // ⏱ slightly faster
 
   return () => clearTimeout(timer);
 }, [query, allData]);
+
 
 
 
