@@ -12,3 +12,32 @@ body {
 shadow{
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 7s linear infinite;
+}
+
+.logo {
+  height: 45px;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: contain;
+  margin-right: 2rem;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
