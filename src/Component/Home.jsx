@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-slate-200 ">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-linear-to-br from-slate-50 to-slate-200 ">
       <div className="w-[92%] max-w-md bg-white rounded-3xl shadow-xl p-8 flex flex-col gap-10 ">
         {/* Header */}
         <div className="text-center">
@@ -22,7 +22,7 @@ const Home = () => {
           <div className="flex flex-col gap-5">
             {/* Bosch */}
             <Link to="/BoschStock">
-              <div className="group border border-gray-200 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-lg bg-gradient-to-br from-slate-100 to-slate-200">
+              <div className="group border border-gray-200 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-lg bg-linear-to-br from-slate-100 to-slate-200">
                 <h1 className="text-lg font-semibold group-hover:text-blue-600">
                   Bosch
                 </h1>
@@ -31,7 +31,7 @@ const Home = () => {
 
             {/* Others */}
             <Link to="/Companies">
-              <div className="group border border-gray-200 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-lg bg-gradient-to-br from-slate-100 to-slate-200">
+              <div className="group border border-gray-200 rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-lg bg-linear-to-br from-slate-100 to-slate-200">
                 <h1 className="text-lg font-semibold group-hover:text-blue-600">
                   Lucas <br /> & Others
                 </h1>
