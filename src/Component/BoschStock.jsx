@@ -49,27 +49,31 @@ const BoschStock = () => {
   }, []);
 
   // 🚀 FAST SEARCH (debounced)
-  useEffect(() => {
+useEffect(() => {
   const timer = setTimeout(() => {
     if (!query) {
       setFilteredData(allData);
       return;
     }
 
-    // 🔥 normalize query (lowercase + no spaces)
-    const normalizedQuery = query
+    // normalize + split query into words
+    const tokens = query
       .toLowerCase()
-      .replace(/\s+/g, "");
+      .trim()
+      .split(/\s+/);
 
     const filtered = allData.filter((item) => {
-      const part = item.part.toLowerCase().replace(/\s+/g, "");
-      const name = item.item.toLowerCase().replace(/\s+/g, "");
-      const desc = item.desc.toLowerCase().replace(/\s+/g, "");
+      const searchableText = `
+        ${item.part}
+        ${item.item}
+        ${item.desc}
+      `
+        .toLowerCase()
+        .replace(/\s+/g, "");
 
-      return (
-        part.includes(normalizedQuery) ||
-        name.includes(normalizedQuery) ||
-        desc.includes(normalizedQuery)
+      // 🔑 every token must exist somewhere in same item
+      return tokens.every((token) =>
+        searchableText.includes(token.replace(/\s+/g, ""))
       );
     });
 
@@ -78,6 +82,7 @@ const BoschStock = () => {
 
   return () => clearTimeout(timer);
 }, [query, allData]);
+
 
 
   return (
