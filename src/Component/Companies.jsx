@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import search from "../assets/icons/search.png";
-import * as XLSX from "xlsx";
 import { lucas } from "../Context/LucasContext";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Companies = () => {
   const [
@@ -13,111 +12,104 @@ const Companies = () => {
     filteredData,
     setFilteredData,
   ] = useContext(lucas);
+
   const [query, setQuery] = useState("");
-
-
-
   const [sheetData, setSheetData] = useState(null);
 
   const handleGetStock = (sheetName) => {
     const data = allData.filter((item) => item.sheet === sheetName);
     setSheetData(data);
   };
+
   useEffect(() => {
-    if (sheetData) {
-      setFilteredData(sheetData);
-    }
+    if (sheetData) setFilteredData(sheetData);
   }, [sheetData]);
 
-
   useEffect(() => {
-    setFilteredSheet(allSheets)
-  }, [allSheets])
-
-
-
+    setFilteredSheet(allSheets);
+  }, [allSheets]);
 
   const handleSearch = (e) => {
-    const rawValue = e.target.value;
-    setQuery(rawValue);
+    const raw = e.target.value;
+    setQuery(raw);
 
-    // 🔥 normalize user input
-    const value = rawValue
-      .toLowerCase()
-      .replace(/\s+/g, "");
-
-    if (value === "") {
+    const value = raw.toLowerCase().replace(/\s+/g, "");
+    if (!value) {
       setFilteredSheet(allSheets);
       return;
     }
 
-    const searched = allSheets.filter((item) => {
-      const normalizedItem = item
-        .toLowerCase()
-        .replace(/\s+/g, "");
-
-      return normalizedItem.includes(value);
-    });
-
-    setFilteredSheet(searched);
+    setFilteredSheet(
+      allSheets.filter((item) =>
+        item.toLowerCase().replace(/\s+/g, "").includes(value)
+      )
+    );
   };
 
-
-
   return (
-    <div className="w-full min-h-screen bg-slate-50 flex flex-col gap-8 py-15 px-4 items-center">
-      {/* Header */}
-      <div className="w-full max-w-4xl bg-white rounded-xl px-6 py-5 shadow-[0_10px_30px_rgba(15,23,42,0.12)]">
+    <div className="min-h-screen w-full bg-slate-50 flex flex-col items-center px-4 py-15">
+
+      {/* HEADER */}
+      <div className="sticky top-0 z-20 w-full max-w-4xl bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-5">
         <h1 className="text-2xl font-semibold text-slate-900">
-          Select company
+          Select Company
         </h1>
-        <p className="text-sm text-slate-500 mt-1">Here all other comapnies</p>
+        <p className="text-xs tracking-widest text-slate-500 mt-1">
+          INVENTORY SOURCES
+        </p>
       </div>
 
-      {/* Search */}
-      <div className="w-full max-w-4xl bg-white rounded-xl px-6 py-5 shadow-[0_10px_30px_rgba(15,23,42,0.12)]">
-        <p className="text-xs tracking-widest text-slate-500 mb-3">
+      {/* SEARCH */}
+      <div className="w-full max-w-4xl mt-8 bg-white rounded-2xl px-6 py-6 border border-slate-200">
+        <p className="text-[11px] tracking-widest text-slate-400 mb-3">
           QUICK SEARCH
         </p>
 
-        <div
-          className="flex items-center gap-2 rounded-lg border border-slate-300 px-3
-                          focus-within:border-slate-900
-                          focus-within:ring-2 focus-within:ring-slate-900/20"
-        >
-          <img className="w-5 opacity-60" src={search} alt="" />
-
+        <div className="flex items-center gap-4 px-5 py-3 rounded-xl bg-slate-50 border border-slate-200 focus-within:ring-2 focus-within:ring-slate-900/10 transition">
+          <img src={search} className="w-4 opacity-60" />
           <input
-            className="w-full py-2 outline-none placeholder:text-sm placeholder:text-slate-400"
-            type="text"
+            className="w-full bg-transparent outline-none text-sm placeholder:text-slate-400"
             value={query}
             onChange={handleSearch}
-            placeholder="Search by Company Name"
+            placeholder="Search company name"
           />
         </div>
       </div>
 
-      {/* Result Cards */}
+      {/* EMPTY */}
       {filteredSheet.length === 0 && (
-        <p className="text-slate-400 text-sm">No matching stock found 🌫️</p>
+        <p className="mt-12 text-sm text-slate-400">
+          No company found
+        </p>
       )}
 
-      {filteredSheet.map((item, index) => (
-        <div
-          key={index}
-          className="w-full max-w-4xl bg-white rounded-xl px-6 py-5
-                       shadow-[0_10px_30px_rgba(15,23,42,0.12)] flex justify-between items-center"
-        >
-          <h1>{item}</h1>
+      {/* LIST */}
+      <div className="w-full max-w-4xl mt-10 flex flex-col gap-4">
+        {filteredSheet.map((item, index) => (
           <Link
-            className="bg-blue-600 py-0.5 px-2 rounded-md text-white font-medium"
-            onClick={() => handleGetStock(item)}
+            key={index}
             to={`/Companies/${item}`}
+            onClick={() => handleGetStock(item)}
+            className="group relative bg-white rounded-2xl px-6 py-5 border border-slate-200 flex items-center justify-between hover:shadow-md transition"
           >
-            Get Stock{" "}
+            {/* accent */}
+            <div className="absolute left-0 top-0 h-full w-1 rounded-l-2xl bg-slate-200 group-hover:bg-slate-400 transition"></div>
+
+            <div>
+              <p className="text-md font-medium text-slate-900">
+                {item}
+              </p>
+              <p className="text-sm text-slate-400 mt-1">
+                View stock details
+              </p>
+            </div>
+
+            <span className="text-slate-400 group-hover:text-slate-700 transition">
+              →
+            </span>
           </Link>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
