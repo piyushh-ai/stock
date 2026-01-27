@@ -122,13 +122,13 @@ const CompanyStock = () => {
                 <p className="text-xs tracking-widest text-slate-400">
                   ITEM
                 </p>{" "}
-                <h1 className="text-lg w-[12rem] whitespace-normal break-words font-medium text-slate-900">
+                <h1 className="text-lg w-48 whitespace-normal wrap-break-word font-medium text-slate-900">
                   {" "}
                   {item.item}{" "}
                 </h1>{" "}
                 <p className="text-sm text-slate-500 mt-1">{item.desc}</p>{" "}
               </div>{" "}
-              <div className="text-right w-[5rem] whitespace-normal break-words">
+              <div className="text-right w-20 whitespace-normal wrap-break-word">
                 {" "}
                 <p className="text-lg tracking-widest text-slate-400">
                   Mrp
