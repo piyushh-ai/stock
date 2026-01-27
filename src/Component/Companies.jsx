@@ -50,7 +50,7 @@ const Companies = () => {
     <div className="min-h-screen w-full bg-slate-50 flex flex-col items-center px-4 py-15">
 
       {/* HEADER */}
-      <div className="sticky top-0 z-20 w-full max-w-4xl bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-5">
+      <div className=" top-0 z-20 w-full max-w-4xl bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-5">
         <h1 className="text-2xl font-semibold text-slate-900">
           Select Company
         </h1>
