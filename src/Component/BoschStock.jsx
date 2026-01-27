@@ -74,7 +74,7 @@ const BoschStock = () => {
   }, [query, allData]);
 
   return (
-    <div className="min-h-screen w-full bg-slate-50 flex flex-col items-center px-4 py-7 gap-8">
+    <div className="min-h-screen w-full bg-slate-50 flex flex-col items-center px-4 py-10 gap-8">
       {/* HEADER */}
       <div className="w-full max-w-4xl bg-white rounded-2xl px-6 py-6 border border-slate-200">
         <h1 className="text-2xl font-semibold text-slate-900">Bosch Stock</h1>
