@@ -99,7 +99,7 @@ const BoschStock = () => {
           <FaArrowLeft className="text-slate-700 text-lg" />
         </button>
       </div>
-      <div className="min-h-screen w-full bg-slate-50 flex flex-col items-center  gap-8">
+      <div className="min-h-screen w-full  flex flex-col items-center  gap-8">
         {/* HEADER */}
         <div className="w-full max-w-4xl bg-white rounded-2xl px-6 py-6 border border-slate-200">
           <h1 className="text-2xl font-semibold text-slate-900">Bosch Stock</h1>

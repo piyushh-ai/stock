@@ -72,7 +72,7 @@ const Companies = () => {
           <FaArrowLeft className="text-slate-700 text-lg" />
         </button>
       </div>
-      <div className="min-h-screen w-full bg-slate-50 flex flex-col items-center ">
+      <div className="min-h-screen w-full  flex flex-col items-center ">
         {/* HEADER */}
         <div className=" top-0 z-20 w-full max-w-4xl bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-5">
           <h1 className="text-2xl font-semibold text-slate-900">
