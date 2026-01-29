@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const MobileMenu = ({ open, setOpen }) => {
+  useEffect(() => {
+    if (open) {
+      // menu open hua → history me ek entry push
+      window.history.pushState({ menu: true }, "");
+    }
+
+    const handleBack = () => {
+      if (open) {
+        setOpen(false); // sirf menu close
+      }
+    };
+
+    window.addEventListener("popstate", handleBack);
+
+    return () => {
+      window.removeEventListener("popstate", handleBack);
+    };
+  }, [open, setOpen]);
+
   return (
     <>
       {/* backdrop */}
