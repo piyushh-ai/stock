@@ -4,6 +4,13 @@ import * as XLSX from "xlsx";
 import { useNavigate } from "react-router-dom";
 import { boschStock } from "../Context/BoschStockContext";
 
+const normalize = (str = "") =>
+  str
+    .toString()
+    .toLowerCase()
+    .replace(/[\s\u00A0]+/g, "")
+    .replace(/[^a-z0-9]/g, "");
+
 const BoschStock = () => {
   const [allData, setAllData, modifiedOn] = useContext(boschStock);
   const [filteredData, setFilteredData] = useState([]);
@@ -11,15 +18,16 @@ const BoschStock = () => {
 
   const navigate = useNavigate();
 
+  // 📦 Excel load
 
   console.log(allData);
 
   // 🔍 Search
   useEffect(() => {
-   if (query.trim().length < 2) {
-  setFilteredData(allData.slice(0, 50));
-  return;
-}
+    if (!query.trim()) {
+      setFilteredData(allData);
+      return;
+    }
 
     const timer = setTimeout(() => {
       // 1️⃣ normalize + split query into tokens
@@ -38,7 +46,7 @@ const BoschStock = () => {
         );
       });
 
-      setFilteredData(filtered.slice(0, 100));
+      setFilteredData(filtered);
     }, 200);
 
     return () => clearTimeout(timer);
