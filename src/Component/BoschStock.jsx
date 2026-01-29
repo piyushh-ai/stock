@@ -9,7 +9,7 @@ const BoschStock = () => {
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState("");
-
+  const [modifiedOn, setModifiedOn] = useState(null);
   const navigate = useNavigate();
 
   // 📦 Excel load
@@ -20,7 +20,11 @@ const BoschStock = () => {
 
       const workbook = XLSX.read(buffer, { type: "array" });
       let temp = [];
-
+      const rawDate = workbook.Props.ModifiedDate;
+      if (rawDate) {
+        const formatted = rawDate.toString().split(" GMT")[0];
+        setModifiedOn(formatted);
+      }
       workbook.SheetNames.forEach((sheetName) => {
         const sheet = workbook.Sheets[sheetName];
         const rows = XLSX.utils.sheet_to_json(sheet, {
@@ -104,6 +108,9 @@ const BoschStock = () => {
         <div className="w-full max-w-4xl bg-white rounded-2xl px-6 py-6 border border-slate-200">
           <h1 className="text-2xl font-semibold text-slate-900">Bosch Stock</h1>
           <p className="text-sm text-slate-500 mt-1">Inventory Search</p>
+          <p className="text-xs text-slate-400 mt-1">
+            Last Updated: {modifiedOn}
+          </p>
         </div>
 
         {/* SEARCH */}
