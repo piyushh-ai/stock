@@ -5,6 +5,13 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+const normalize = (str = "") =>
+  str
+    .toString()
+    .toLowerCase()
+    .replace(/[\s\u00A0]+/g, "") // 👈 normal + non-breaking spaces
+    .replace(/[^a-z0-9]/g, "");
+
 const BoschStock = () => {
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -38,14 +45,22 @@ const BoschStock = () => {
           if (!row[1]) continue;
 
           temp.push({
-            sno: temp.length + 1,
-            part: String(row[1]).trim(),
-            item: String(row[2]).trim(),
-            desc: String(row[3]).trim(),
-            qty: String(row[4]).trim(),
-            mrp: String(row[5]).trim(),
-            sheet: sheetName,
-          });
+    sno: temp.length + 1,
+
+    part: String(row[1]).trim(),
+    item: String(row[2]).trim(),
+    desc: String(row[3]).trim(),
+    qty: String(row[4]).trim(),
+    mrp: String(row[5]).trim(),
+    sheet: sheetName,
+
+    // 🔥 search ke liye pavitra version
+    partN: normalize(row[1]),
+    itemN: normalize(row[2]),
+    descN: normalize(row[3]),
+    sheetN: normalize(sheetName),
+  });
+
         }
       });
 
@@ -55,36 +70,35 @@ const BoschStock = () => {
 
     readExcel();
   }, []);
+  
 
   // 🔍 Search
-  useEffect(() => {
-    if (!query.trim()) {
-      setFilteredData(allData);
-      return;
-    }
+ useEffect(() => {
+  if (!query.trim()) {
+    setFilteredData(allData);
+    return;
+  }
 
-    const timer = setTimeout(() => {
-      const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const timer = setTimeout(() => {
+    const q = normalize(query);
 
-      const filtered = allData.filter((item) => {
-        const fields = [item.part, item.item, item.desc].map((f) =>
-          f.toLowerCase(),
-        );
+    const filtered = allData.filter((item) =>
+      item.partN.includes(q) ||
+      item.itemN.includes(q) ||
+      item.descN.includes(q) ||
+      item.sheetN.includes(q)
+    );
 
-        return tokens.every((token) =>
-          fields.some((field) => field.includes(token)),
-        );
-      });
+    setFilteredData(filtered);
+  }, 200);
 
-      setFilteredData(filtered);
-    }, 200);
+  return () => clearTimeout(timer);
+}, [query, allData]);
 
-    return () => clearTimeout(timer);
-  }, [query, allData]);
+
 
   return (
     <div className="px-4 pb-10 pt-8">
-      
       <div className="min-h-screen w-full  flex flex-col items-center  gap-8">
         {/* HEADER */}
         <div className="w-full max-w-4xl bg-white rounded-2xl px-6 py-6 border border-slate-200">
