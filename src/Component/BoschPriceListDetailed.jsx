@@ -9,33 +9,61 @@ const BoschPriceListDetailed = () => {
   const item = allData.find((elem) => id == elem.id);
 
   return (
-    <div className="flex flex-col items-center justify-center py-10">
-      <div className="w-[92%] max-w-md bg-white rounded-4xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] px-8 py-10 flex flex-col gap-10 items-center">
-        <h1 className="text-xl font-bold tracking-wide">Item description</h1>
-        <div className="w-full  flex flex-col items-start gap-5">
-          <h1 className="text-md">
-            Part No. - {" "}
-            <span className="px-1 tracking-widest text-blue-700">{item.part}</span>
-          </h1>
-          <h1 className="text-md">
-            Description - {" "}
-            <span className="px-1 tracking-widest">{item.desc}</span>
-          </h1>
-          <h1 className="text-md">
-            Current Mrp - {" "}
-            <span className="px-1 tracking-widest">{item.mrp}/-</span>
-          </h1>
-          <h1 className="text-md">
-            HSN Code - {" "}
-            <span className="px-1 tracking-widest">{item.hsn}</span>
-          </h1>
-          <h1 className="text-md">
-            GST - {" "}
-            <span className="px-1 tracking-widest">{item.gst}%</span>
-          </h1>
-        </div>
+    <div className="flex flex-col mt-8 items-center justify-center py-12 bg-slate-50">
+  <div className="w-[92%] max-w-md bg-white rounded-3xl 
+  shadow-[0_25px_70px_rgba(0,0,0,0.08)] 
+  px-7 py-9 flex flex-col gap-8">
+
+    {/* Title */}
+    <h1 className="text-lg font-semibold tracking-wide text-slate-800 text-center">
+      Item Description
+    </h1>
+
+    {/* Divider */}
+    <div className="h-[1px] w-full bg-slate-200"></div>
+
+    {/* Content */}
+    <div className="w-full flex flex-col gap-5 text-lg">
+
+      <div className="flex justify-between">
+        <span className="text-slate-500">Part No. </span>
+        <span className="font-medium tracking-wider text-blue-700">
+          {item.part}
+        </span>
       </div>
+
+      <div className="flex justify-between">
+        <span className="text-slate-500">Description </span>
+        <span className="font-medium tracking-wide text-slate-800">
+          {item.desc}
+        </span>
+      </div>
+
+      <div className="flex justify-between">
+        <span className="text-slate-500">Current MRP </span>
+        <span className="font-semibold text-emerald-600">
+          ₹ {item.mrp}
+        </span>
+      </div>
+
+      <div className="flex justify-between">
+        <span className="text-slate-500">HSN Code </span>
+        <span className="font-medium tracking-wider">
+          {item.hsn}
+        </span>
+      </div>
+
+      <div className="flex justify-between">
+        <span className="text-slate-500">GST</span>
+        <span className="font-medium text-indigo-600">
+          {item.gst}%
+        </span>
+      </div>
+
     </div>
+  </div>
+</div>
+
   );
 };
 
