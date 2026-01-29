@@ -48,7 +48,7 @@ const PriceListBoschPC = () => {
 
   return (
     <>
-      <div className="px-4 pb-10 pt-8 flex flex-col items-center justify-center gap-5">
+      <div className="px-4 pb-10 pt-5 flex flex-col items-center justify-center gap-5">
         <div className="w-full max-w-4xl bg-white rounded-2xl px-6 py-6 border border-slate-200">
           <h1 className="text-2xl font-semibold text-slate-900">Bosch MRP</h1>
           <p className="text-sm text-slate-500 mt-1">Price List</p>
@@ -75,8 +75,8 @@ const PriceListBoschPC = () => {
           <p className="text-sm text-slate-400">No matching Item found</p>
         )}
         {filteredData.map((item, idx) => (
-          <Link className="w-full" to={`/PriceListBoschPC/${item.id}`}>
-          <div className="flex justify-between items-center w-full px-5 bg-white rounded-2xl py-5 border-slate-200" key={idx}>
+          <Link key={idx} className="w-full" to={`/PriceListBoschPC/${item.id}`}>
+          <div className="flex justify-between items-center w-full px-5 bg-white rounded-2xl py-5 border-slate-200" >
             <div>
               <h1 className="text-md text-blue-700 tracking-widest">{item.part}</h1>
             </div>
