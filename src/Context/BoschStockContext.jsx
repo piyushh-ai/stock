@@ -12,53 +12,50 @@ const BoschStockContext = (props) => {
   const [modifiedOn, setModifiedOn] = useState(null);
   const [allData, setAllData] = useState([]);
 
-  useEffect(() => {
-    const readExcel = async () => {
-      const res = await fetch("/BOSCH_STOCK1.xlsx");
-      const buffer = await res.arrayBuffer();
+ useEffect(() => {
+  const cached = localStorage.getItem("bosch_stock");
 
-      const workbook = XLSX.read(buffer, { type: "array" });
-      let temp = [];
-      const rawDate = workbook.Props.ModifiedDate;
-      if (rawDate) {
-        const formatted = rawDate.toString().split(" GMT")[0];
-        setModifiedOn(formatted);
-      }
-      workbook.SheetNames.forEach((sheetName) => {
-        const sheet = workbook.Sheets[sheetName];
-        const rows = XLSX.utils.sheet_to_json(sheet, {
-          header: 1,
-          defval: "",
-          blankrows: false,
-        });
+  if (cached) {
+    setAllData(JSON.parse(cached));
+    return;
+  }
 
-        for (let i = 1; i < rows.length; i++) {
-          const row = rows[i];
-          if (!row[1]) continue;
+  const readExcel = async () => {
+    const res = await fetch("/BOSCH_STOCK1.xlsx");
+    const buffer = await res.arrayBuffer();
+    const workbook = XLSX.read(buffer, { type: "array" });
 
-          temp.push({
-            sno: temp.length + 1,
-
-            part: String(row[1]).trim(),
-            item: String(row[2]).trim(),
-            desc: String(row[3]).trim(),
-            qty: String(row[4]).trim(),
-            mrp: String(row[5]).trim(),
-            sheet: sheetName,
-
-            // 🔥 search ke liye pavitra version
-            partN: normalize(row[1]),
-            itemN: normalize(row[2]),
-            descN: normalize(row[3]),
-            sheetN: normalize(sheetName),
-          });
-        }
+    let temp = [];
+    workbook.SheetNames.forEach((sheetName) => {
+      const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {
+        header: 1,
+        defval: "",
       });
-      setAllData(temp);
-    };
 
-    readExcel();
-  }, []);
+      for (let i = 1; i < rows.length; i++) {
+        if (!rows[i][1]) continue;
+
+        temp.push({
+          part: rows[i][1],
+          item: rows[i][2],
+          desc: rows[i][3],
+          qty: rows[i][4],
+          mrp: rows[i][5],
+          partN: normalize(rows[i][1]),
+          itemN: normalize(rows[i][2]),
+          descN: normalize(rows[i][3]),
+          sheetN: normalize(sheetName),
+        });
+      }
+    });
+
+    localStorage.setItem("bosch_stock", JSON.stringify(temp));
+    setAllData(temp);
+  };
+
+  readExcel();
+}, []);
+
 
   useEffect(() => {
     

@@ -11,16 +11,15 @@ const BoschStock = () => {
 
   const navigate = useNavigate();
 
-  // 📦 Excel load
 
   console.log(allData);
 
   // 🔍 Search
   useEffect(() => {
-    if (!query.trim()) {
-      setFilteredData(allData);
-      return;
-    }
+   if (query.trim().length < 2) {
+  setFilteredData(allData.slice(0, 50));
+  return;
+}
 
     const timer = setTimeout(() => {
       // 1️⃣ normalize + split query into tokens
@@ -39,7 +38,7 @@ const BoschStock = () => {
         );
       });
 
-      setFilteredData(filtered);
+      setFilteredData(filtered.slice(0, 100));
     }, 200);
 
     return () => clearTimeout(timer);
