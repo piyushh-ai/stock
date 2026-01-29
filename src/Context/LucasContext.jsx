@@ -11,6 +11,7 @@ const LucasContext = (props) => {
   const [filteredData, setFilteredData] = useState([]);
   const [allSheets, setAllSheets] = useState([]);
   const [filteredSheet, setFilteredSheet] = useState([]);
+  const [modifiedOn, setModifiedOn] = useState(null);
 
   const { id } = useParams();
 
@@ -22,6 +23,11 @@ const LucasContext = (props) => {
 
         const workbook = XLSX.read(buffer, { type: "array" });
         const sheetNames = workbook.SheetNames;
+        const rawDate = workbook.Props.ModifiedDate;
+        if (rawDate) {
+          const formatted = rawDate.toString().split(" GMT")[0];
+          setModifiedOn(formatted);
+        }
 
         setAllSheets(sheetNames);
         setFilteredSheet(sheetNames);
@@ -63,6 +69,8 @@ const LucasContext = (props) => {
     readExcel();
   }, []);
 
+  
+
   return (
     <lucas.Provider
       value={[
@@ -72,6 +80,7 @@ const LucasContext = (props) => {
         allData,
         filteredData,
         setFilteredData,
+        modifiedOn
       ]}
     >
       {props.children}
