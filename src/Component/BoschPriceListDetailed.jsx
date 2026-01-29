@@ -20,7 +20,7 @@ const BoschPriceListDetailed = () => {
     </h1>
 
     {/* Divider */}
-    <div className="h-[1px] w-full bg-slate-200"></div>
+    <div className="h-px w-full bg-slate-200"></div>
 
     {/* Content */}
     <div className="w-full flex flex-col gap-5 text-md">
