@@ -15,7 +15,7 @@ const Header = ({ setMenuOpen }) => {
     w-full
     px-4 pt-4
     flex items-center justify-between
-    bg-transparent mt-5
+    bg-transparent mt-9
     "
     >
       {/* Back */}
