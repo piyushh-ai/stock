@@ -1,6 +1,5 @@
 import axios from "axios";
-import React, { createContext, useEffect } from "react";
-import { useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 
 const normalize = (str = "") =>
@@ -10,32 +9,49 @@ const normalize = (str = "") =>
     .replace(/[\s\u00A0]+/g, "")
     .replace(/[^a-z0-9]/g, "");
 
-
 export const boschPricePC = createContext();
+
 const BoschPriceListContext = (props) => {
   const [allData, setAllData] = useState([]);
   const [modifiedOn, setModifiedOn] = useState(null);
 
   useEffect(() => {
-    let finalData = [];
+    const cached = localStorage.getItem("bosch_price_pc");
+
+    // ✅ 1️⃣ agar cache mil gaya → turant load
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      setAllData(parsed.data);
+      setModifiedOn(parsed.modifiedOn);
+      return;
+    }
+
+    // ❌ warna Excel read karo
     const readExcel = async () => {
-      const res = await axios.get("/price_lists/PRICE_LIST_PC_JAN_2026.xlsx", {
-        responseType: "arraybuffer",
-      });
-      const buffer = res.data;
-      const workbook = XLSX.read(buffer, { type: "array" });
+      const res = await axios.get(
+        "/price_lists/PRICE_LIST_PC_JAN_2026.xlsx",
+        { responseType: "arraybuffer" }
+      );
+
+      const workbook = XLSX.read(res.data, { type: "array" });
       const sheetName = workbook.SheetNames[0];
-      const rawDate = workbook.Props.ModifiedDate;
-      if (rawDate) {
-        const formatted = rawDate.toString().split(" GMT")[0];
-        setModifiedOn(formatted);
-      }
       const worksheet = workbook.Sheets[sheetName];
+
+      const rawDate = workbook.Props?.ModifiedDate;
+      const formattedDate = rawDate
+        ? rawDate.toString().split(" GMT")[0]
+        : null;
+
+      setModifiedOn(formattedDate);
+
       const rows = XLSX.utils.sheet_to_json(worksheet, {
         header: 1,
         defval: "",
         blankrows: false,
       });
+
+      let finalData = [];
+
       for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         if (!row[1]) continue;
@@ -47,7 +63,6 @@ const BoschPriceListContext = (props) => {
           mrp: String(row[8]).trim(),
           hsn: String(row[15]).trim(),
           gst: String(row[16]).trim(),
-
           sheet: sheetName,
 
           partN: normalize(row[0]),
@@ -55,8 +70,19 @@ const BoschPriceListContext = (props) => {
           sheetN: normalize(sheetName),
         });
       }
+
+      // ✅ 2️⃣ cache me save
+      localStorage.setItem(
+        "bosch_price_pc",
+        JSON.stringify({
+          data: finalData,
+          modifiedOn: formattedDate,
+        })
+      );
+
       setAllData(finalData);
     };
+
     readExcel();
   }, []);
 
