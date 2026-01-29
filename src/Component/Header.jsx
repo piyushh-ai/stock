@@ -12,7 +12,7 @@ const Header = ({ setMenuOpen }) => {
       className="
        top-0 z-30
       w-full
-      px-4 pt-4 
+      overflow-hidden shrink-0 
       flex items-center justify-between mt-9
     "
     >
