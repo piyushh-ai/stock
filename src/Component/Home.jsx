@@ -6,14 +6,14 @@ const Home = () => {
     <div className="min-h-screen w-full flex flex-col  items-center justify-center">
 
       {/* Main Card */}
-      <div className="w-[92%] max-w-md mt-8 bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.08)] px-8 py-10 flex flex-col gap-12">
+      <div className="w-[92%] max-w-md mt-8 bg-white rounded-4xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] px-8 py-10 flex flex-col gap-12">
 
         {/* Header */}
         <div className="text-center flex flex-col gap-2">
           <h1 className="text-3xl font-semibold tracking-wide text-slate-900">
             B.K Engineering
           </h1>
-          <div className="h-[2px] w-14 bg-slate-300 mx-auto rounded-full"></div>
+          <div className="h-0.5 w-14 bg-slate-300 mx-auto rounded-full"></div>
           <p className="text-slate-500 text-base tracking-wide">
             Inventory Management
           </p>
@@ -31,7 +31,7 @@ const Home = () => {
             <Link to="/BoschStock">
               <div className="group relative overflow-hidden rounded-2xl bg-white border border-slate-200 px-6 py-5 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
 
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-50 to-white opacity-0 group-hover:opacity-100 transition"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-slate-50 to-white opacity-0 group-hover:opacity-100 transition"></div>
 
                 <div className="relative flex items-center justify-between">
                   <div>
@@ -53,7 +53,7 @@ const Home = () => {
             <Link to="/Companies">
               <div className="group relative overflow-hidden rounded-2xl bg-white border border-slate-200 px-6 py-5 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
 
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-50 to-white opacity-0 group-hover:opacity-100 transition"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-slate-50 to-white opacity-0 group-hover:opacity-100 transition"></div>
 
                 <div className="relative flex items-center justify-between">
                   <div>
