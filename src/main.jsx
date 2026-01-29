@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import LucasContext from "./Context/LucasContext.jsx";
 import BoschPriceListContext from "./Context/BoschPriceListContext.jsx";
 import eruda from "eruda";
+import BoschStockContext from "./Context/BoschStockContext.jsx";
 
 if (process.env.NODE_ENV === "development") {
   eruda.init();
@@ -16,7 +17,9 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <LucasContext>
        <BoschPriceListContext>
-         <App />
+         <BoschStockContext>
+          <App />
+         </BoschStockContext>
        </BoschPriceListContext>
       </LucasContext>
     </BrowserRouter>
