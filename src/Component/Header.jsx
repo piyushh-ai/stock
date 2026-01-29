@@ -10,7 +10,7 @@ const Header = ({ setMenuOpen }) => {
   return (
     <div
       className="
-       fixed top-0 left-0
+        top-0 left-0
     z-30
     w-full
     px-4 pt-4
