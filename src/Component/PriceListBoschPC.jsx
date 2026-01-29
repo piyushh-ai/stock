@@ -78,10 +78,10 @@ const PriceListBoschPC = () => {
           <Link className="w-full" to={`/PriceListBoschPC/${item.id}`}>
           <div className="flex justify-between items-center w-full px-5 bg-white rounded-2xl py-5 border-slate-200" key={idx}>
             <div>
-              <h1 className="text-lg text-blue-700 tracking-widest">{item.part}</h1>
+              <h1 className="text-md text-blue-700 tracking-widest">{item.part}</h1>
             </div>
             <div>
-              <h1 className="text-md tracking-wider">{item.desc}</h1>
+              <h1 className="text-sm tracking-wider">{item.desc}</h1>
             </div>
             <span className="text-slate-400 group-hover:text-slate-700 transition text-2xl">
                 →
