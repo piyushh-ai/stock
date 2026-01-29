@@ -5,51 +5,51 @@ import { useNavigate, useLocation } from "react-router-dom";
 const Header = ({ setMenuOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const isHome = location.pathname === "/";
 
   return (
-    <div className="w-full flex items-center justify-between  px-4 pt-5">
-
-      {/* Back Button – sirf home ke alawa */}
+    <div
+      className="
+       top-0 z-30
+      w-full
+      px-4 pt-4 
+      flex items-center justify-between mt-5
+    "
+    >
+      {/* Back */}
       {!isHome ? (
         <button
           onClick={() => navigate(-1)}
           className="
+            w-10 h-10
             flex items-center justify-center
-            w-11 h-11
             rounded-full
             bg-white
             border border-slate-200
-            shadow-sm
-            hover:shadow-md
-            hover:bg-slate-50
             active:scale-95
-            transition-all duration-200
+            transition
           "
         >
-          <FaArrowLeft className="text-slate-700 text-lg" />
+          <FaArrowLeft className="text-slate-700 text-base" />
         </button>
       ) : (
-        <div className="w-11 h-11" /> // spacing maintain
+        <div className="w-10 h-10" />
       )}
 
-      {/* Burger Menu – hamesha dikhe */}
+      {/* Menu */}
       <button
         onClick={() => setMenuOpen(true)}
         className="
-          w-11 h-11
+          w-10 h-10
           rounded-full
           bg-white
           border border-slate-200
-          shadow-sm
-          text-2xl
+          text-xl
           active:scale-95
         "
       >
         ☰
       </button>
-
     </div>
   );
 };
