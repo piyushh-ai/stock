@@ -24,17 +24,17 @@ const MobileMenu = ({ open, setOpen }) => {
           <h1>B.K Engineering</h1>
         </div>
 
-        <nav className="flex flex-col items-center p-5 gap-4 text-lg">
-          <div className="mb-5 w-full  border-b">
+        <nav className="flex flex-col items-center px-2 py-5 gap-4 text-lg">
+          <div className="pb-6 pt-2 w-full flex items-center justify-center border-b border-gray-700">
             <h1 className="">MENU</h1>
           </div>
-          <Link onClick={() => setOpen(false)} to="/">
+          <Link className="pb-4 pt-2 w-full flex items-center justify-center border-b border-gray-700 " onClick={() => setOpen(false)} to="/">
             Home
           </Link>
-          <Link onClick={() => setOpen(false)} to="/Companies">
+          <Link className="pb-4 pt-2 w-full flex items-center justify-center border-b border-gray-700 " onClick={() => setOpen(false)} to="/Companies">
             Companies
           </Link>
-          <Link onClick={() => setOpen(false)} to="/BoschStock">
+          <Link className="pb-4 pt-2 w-full flex items-center justify-center border-b border-gray-700 " onClick={() => setOpen(false)} to="/BoschStock">
             Bosch Stock
           </Link>
         </nav>
