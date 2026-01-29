@@ -80,20 +80,33 @@ const BoschStock = () => {
   }
 
   const timer = setTimeout(() => {
-    const q = normalize(query);
+    // 1️⃣ normalize + split query into tokens
+    const tokens = query
+      .toLowerCase()
+      .split(/\s+/)
+      .map(normalize)
+      .filter(Boolean);
 
-    const filtered = allData.filter((item) =>
-      item.partN.includes(q) ||
-      item.itemN.includes(q) ||
-      item.descN.includes(q) ||
-      item.sheetN.includes(q)
-    );
+    const filtered = allData.filter((item) => {
+      const fields = [
+        item.partN,
+        item.itemN,
+        item.descN,
+        item.sheetN,
+      ];
+
+      // 2️⃣ har token kisi na kisi field me milna chahiye
+      return tokens.every((token) =>
+        fields.some((field) => field.includes(token))
+      );
+    });
 
     setFilteredData(filtered);
   }, 200);
 
   return () => clearTimeout(timer);
 }, [query, allData]);
+
 
 
 
