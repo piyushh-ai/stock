@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col  items-center mt-5">
+    <div className="h-screen w-full flex flex-col  items-center mt-5">
 
       {/* Main Card */}
       <div className="w-[92%] max-w-md  bg-white rounded-4xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] px-8 py-10 flex flex-col gap-12">
