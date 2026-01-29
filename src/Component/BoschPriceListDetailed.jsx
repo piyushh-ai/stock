@@ -23,7 +23,7 @@ const BoschPriceListDetailed = () => {
     <div className="h-[1px] w-full bg-slate-200"></div>
 
     {/* Content */}
-    <div className="w-full flex flex-col gap-5 text-lg">
+    <div className="w-full flex flex-col gap-5 text-md">
 
       <div className="flex justify-between">
         <span className="text-slate-500">Part No. </span>
