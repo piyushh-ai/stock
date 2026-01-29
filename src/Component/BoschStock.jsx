@@ -84,25 +84,7 @@ const BoschStock = () => {
 
   return (
     <div className="px-4 pb-10 pt-8">
-      <div className="w-full flex justify-start mb-6">
-        <button
-          onClick={() => navigate(-1)}
-          className="
-    flex items-center justify-center
-    w-11 h-11
-    rounded-full
-    bg-white
-    border border-slate-200
-    shadow-sm
-    hover:shadow-md
-    hover:bg-slate-50
-    active:scale-95
-    transition-all duration-200
-  "
-        >
-          <FaArrowLeft className="text-slate-700 text-lg" />
-        </button>
-      </div>
+      
       <div className="min-h-screen w-full  flex flex-col items-center  gap-8">
         {/* HEADER */}
         <div className="w-full max-w-4xl bg-white rounded-2xl px-6 py-6 border border-slate-200">

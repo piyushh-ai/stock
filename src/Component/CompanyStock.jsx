@@ -16,12 +16,11 @@ const CompanyStock = () => {
     allData,
     filteredData,
     setFilteredData,
-    modifiedOn
+    modifiedOn,
   ] = useContext(lucas);
 
   const navigate = useNavigate();
-  
-  
+
   // 🧱 STEP 1: sirf is company ka data (memoized)
   const baseData = useMemo(() => {
     return allData.filter((item) => item.sheet === id);
@@ -67,25 +66,6 @@ const CompanyStock = () => {
 
   return (
     <div className="px-4 pb-10 pt-8">
-      <div className="w-full flex justify-start mb-6">
-        <button
-          onClick={() => navigate(-1)}
-          className="
-    flex items-center justify-center
-    w-11 h-11
-    rounded-full
-    bg-white
-    border border-slate-200
-    shadow-sm
-    hover:shadow-md
-    hover:bg-slate-50
-    active:scale-95
-    transition-all duration-200
-  "
-        >
-          <FaArrowLeft className="text-slate-700 text-lg" />
-        </button>
-      </div>
       <div className="w-full min-h-screen  flex flex-col gap-8 items-center">
         {/* Header */}
         <div className="w-full max-w-4xl bg-white rounded-xl px-6 py-5 shadow-[0_10px_30px_rgba(15,23,42,0.12)]">
