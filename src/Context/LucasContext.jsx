@@ -13,7 +13,7 @@ const LucasContext = (props) => {
   const [filteredSheet, setFilteredSheet] = useState([]);
   const [modifiedOn, setModifiedOn] = useState(null);
 
-  const { id } = useParams();
+
 
   useEffect(() => {
     const readExcel = async () => {
@@ -36,6 +36,7 @@ const LucasContext = (props) => {
 
         sheetNames.forEach((sheetName) => {
           const worksheet = workbook.Sheets[sheetName];
+
 
           const rows = XLSX.utils.sheet_to_json(worksheet, {
             header: 1,

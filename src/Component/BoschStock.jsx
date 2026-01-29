@@ -45,22 +45,21 @@ const BoschStock = () => {
           if (!row[1]) continue;
 
           temp.push({
-    sno: temp.length + 1,
+            sno: temp.length + 1,
 
-    part: String(row[1]).trim(),
-    item: String(row[2]).trim(),
-    desc: String(row[3]).trim(),
-    qty: String(row[4]).trim(),
-    mrp: String(row[5]).trim(),
-    sheet: sheetName,
+            part: String(row[1]).trim(),
+            item: String(row[2]).trim(),
+            desc: String(row[3]).trim(),
+            qty: String(row[4]).trim(),
+            mrp: String(row[5]).trim(),
+            sheet: sheetName,
 
-    // 🔥 search ke liye pavitra version
-    partN: normalize(row[1]),
-    itemN: normalize(row[2]),
-    descN: normalize(row[3]),
-    sheetN: normalize(sheetName),
-  });
-
+            // 🔥 search ke liye pavitra version
+            partN: normalize(row[1]),
+            itemN: normalize(row[2]),
+            descN: normalize(row[3]),
+            sheetN: normalize(sheetName),
+          });
         }
       });
 
@@ -70,45 +69,36 @@ const BoschStock = () => {
 
     readExcel();
   }, []);
-  
 
   // 🔍 Search
- useEffect(() => {
-  if (!query.trim()) {
-    setFilteredData(allData);
-    return;
-  }
+  useEffect(() => {
+    if (!query.trim()) {
+      setFilteredData(allData);
+      return;
+    }
 
-  const timer = setTimeout(() => {
-    // 1️⃣ normalize + split query into tokens
-    const tokens = query
-      .toLowerCase()
-      .split(/\s+/)
-      .map(normalize)
-      .filter(Boolean);
+    const timer = setTimeout(() => {
+      // 1️⃣ normalize + split query into tokens
+      const tokens = query
+        .toLowerCase()
+        .split(/\s+/)
+        .map(normalize)
+        .filter(Boolean);
 
-    const filtered = allData.filter((item) => {
-      const fields = [
-        item.partN,
-        item.itemN,
-        item.descN,
-        item.sheetN,
-      ];
+      const filtered = allData.filter((item) => {
+        const fields = [item.partN, item.itemN, item.descN, item.sheetN];
 
-      // 2️⃣ har token kisi na kisi field me milna chahiye
-      return tokens.every((token) =>
-        fields.some((field) => field.includes(token))
-      );
-    });
+        // 2️⃣ har token kisi na kisi field me milna chahiye
+        return tokens.every((token) =>
+          fields.some((field) => field.includes(token)),
+        );
+      });
 
-    setFilteredData(filtered);
-  }, 200);
+      setFilteredData(filtered);
+    }, 200);
 
-  return () => clearTimeout(timer);
-}, [query, allData]);
-
-
-
+    return () => clearTimeout(timer);
+  }, [query, allData]);
 
   return (
     <div className="px-4 pb-10 pt-8">

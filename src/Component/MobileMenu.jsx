@@ -136,6 +136,28 @@ const MobileMenu = ({ open, setOpen }) => {
               Bosch parts inventory
             </p>
           </Link>
+          <Link
+            to="/PriceListBoschPC"
+            onClick={() => setOpen(false)}
+            className={`rounded-xl px-5 py-4 border transition
+              ${
+                isActive("/PriceListBoschPC")
+                  ? "bg-slate-900 text-white border-slate-900"
+                  : "bg-white text-slate-900 border-slate-200 hover:bg-slate-50"
+              }
+            `}
+          >
+            <p className="text-base font-medium">Bosch Price List</p>
+            <p
+              className={`text-xs mt-1 ${
+                isActive("/PriceListBoschPC")
+                  ? "text-slate-300"
+                  : "text-slate-500"
+              }`}
+            >
+              Bosch current MRP
+            </p>
+          </Link>
         </nav>
 
         {/* footer */}

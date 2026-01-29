@@ -6,6 +6,8 @@ import Companies from "./Component/Companies";
 import CompanyStock from "./Component/CompanyStock";
 import MobileMenu from "./Component/MobileMenu";
 import Header from "./Component/Header";
+import PriceListBoschPC from "./Component/PriceListBoschPC";
+import BoschPriceListDetailed from "./Component/BoschPriceListDetailed";
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,6 +23,10 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/BoschStock" element={<BoschStock />} />
         <Route path="/Companies" element={<Companies />} />
+        <Route path="/PriceListBoschPC" element={<PriceListBoschPC />} />
+        <Route path="/PriceListBoschPC/:id" element={<BoschPriceListDetailed />} />
+
+
         <Route path="/Companies/:id" element={<CompanyStock />} />
       </Routes>
     </div>
