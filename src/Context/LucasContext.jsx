@@ -1,45 +1,44 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import search from "../assets/icons/search.png";
+import React, { createContext, useEffect, useState } from "react";
 import * as XLSX from "xlsx";
-import { createContext } from "react";
-import { useParams } from "react-router-dom";
 
 export const lucas = createContext();
-const LucasContext = (props) => {
+
+const LucasContext = ({ children }) => {
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [allSheets, setAllSheets] = useState([]);
   const [filteredSheet, setFilteredSheet] = useState([]);
   const [modifiedOn, setModifiedOn] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const readExcel = async () => {
       try {
-        const res = await fetch("/LUCAS_STOCK.xlsx");
-        const buffer = await res.arrayBuffer();
+        setLoading(true);
 
-        const workbook = XLSX.read(buffer, { type: "array" });
-        const sheetNames = workbook.SheetNames;
-        const rawDate = workbook.Props.ModifiedDate;
-        if (rawDate) {
-          const formatted = rawDate.toString().split(" GMT")[0];
-          setModifiedOn(formatted);
+        // ⚠️ Excel file MUST be inside /public
+        const res = await fetch("/LUCAS_STOCK.xlsx");
+
+        if (!res.ok) {
+          throw new Error("Excel file not found");
         }
 
+        const buffer = await res.arrayBuffer();
+        const workbook = XLSX.read(buffer, { type: "array" });
+
+        const sheetNames = workbook.SheetNames;
         setAllSheets(sheetNames);
         setFilteredSheet(sheetNames);
+
+        const rawDate = workbook.Props?.ModifiedDate;
+        if (rawDate) {
+          setModifiedOn(rawDate.toString().split(" GMT")[0]);
+        }
 
         let finalData = [];
 
         sheetNames.forEach((sheetName) => {
           const worksheet = workbook.Sheets[sheetName];
-
-
           const rows = XLSX.utils.sheet_to_json(worksheet, {
             header: 1,
             defval: "",
@@ -64,22 +63,22 @@ const LucasContext = (props) => {
 
         setAllData(finalData);
         setFilteredData(finalData);
-        
 
+        console.log("✅ Excel loaded:", finalData.length);
       } catch (err) {
-        console.error("Excel load error:", err);
+        console.error("❌ Excel load error:", err);
+      } finally {
+        // 🔑 THIS LINE SAVES YOUR LIFE
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     readExcel();
   }, []);
 
-  
-
   return (
     <lucas.Provider
-      value={[
+      value={{
         allSheets,
         filteredSheet,
         setFilteredSheet,
@@ -87,10 +86,10 @@ const LucasContext = (props) => {
         filteredData,
         setFilteredData,
         modifiedOn,
-        loading
-      ]}
+        loading,
+      }}
     >
-      {props.children}
+      {children}
     </lucas.Provider>
   );
 };
