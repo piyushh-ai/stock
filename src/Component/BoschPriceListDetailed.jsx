@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { boschPricePC } from "../Context/BoschPriceListContext";
 import { useParams } from "react-router-dom";
-import Loader from "./loader";
 import Loading from "./Loading";
 
 const BoschPriceListDetailed = () => {

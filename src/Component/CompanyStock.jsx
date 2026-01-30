@@ -4,7 +4,6 @@ import search from "../assets/icons/search.png";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import Loader from "./loader";
 import Loading from "./Loading";
 
 const CompanyStock = () => {
