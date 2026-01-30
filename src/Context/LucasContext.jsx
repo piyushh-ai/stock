@@ -64,11 +64,12 @@ const LucasContext = (props) => {
 
         setAllData(finalData);
         setFilteredData(finalData);
-        setLoading(false);
+        
 
       } catch (err) {
         console.error("Excel load error:", err);
       }
+      setLoading(false);
     };
 
     readExcel();
