@@ -12,6 +12,8 @@ const LucasContext = (props) => {
   const [allSheets, setAllSheets] = useState([]);
   const [filteredSheet, setFilteredSheet] = useState([]);
   const [modifiedOn, setModifiedOn] = useState(null);
+    const [loading, setLoading] = useState(true);
+
 
 
 
@@ -62,6 +64,8 @@ const LucasContext = (props) => {
 
         setAllData(finalData);
         setFilteredData(finalData);
+        setLoading(false);
+
       } catch (err) {
         console.error("Excel load error:", err);
       }
@@ -81,7 +85,8 @@ const LucasContext = (props) => {
         allData,
         filteredData,
         setFilteredData,
-        modifiedOn
+        modifiedOn,
+        loading
       ]}
     >
       {props.children}

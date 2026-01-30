@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { boschPricePC } from "../Context/BoschPriceListContext";
 import { Link } from "react-router-dom";
 import search from "../assets/icons/search.png";
+import Loader from "./loader";
 
 const normalize = (str = "") =>
   str
@@ -11,7 +12,7 @@ const normalize = (str = "") =>
     .replace(/[^a-z0-9]/g, "");
 
 const PriceListBoschPC = () => {
-  const [allData, setAllData, modifiedOn] = useContext(boschPricePC);
+  const [allData, setAllData, modifiedOn, loading] = useContext(boschPricePC);
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState("");
 
@@ -45,6 +46,12 @@ const PriceListBoschPC = () => {
   useEffect(() => {
     setFilteredData(allData);
   }, [allData]);
+
+  if (loading) {
+  return (
+    <Loader/>
+  );
+}
 
   return (
     <>

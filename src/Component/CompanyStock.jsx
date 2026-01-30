@@ -4,6 +4,7 @@ import search from "../assets/icons/search.png";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import Loader from "./loader";
 
 const CompanyStock = () => {
   const { id } = useParams();
@@ -17,6 +18,7 @@ const CompanyStock = () => {
     filteredData,
     setFilteredData,
     modifiedOn,
+    loading
   ] = useContext(lucas);
 
   const navigate = useNavigate();
@@ -63,6 +65,12 @@ const CompanyStock = () => {
 
     return () => clearTimeout(timer);
   }, [query, baseData]);
+
+  if (loading) {
+  return (
+    <Loader/>
+  );
+}
 
   return (
     <div className="px-4 pb-10 pt-8">

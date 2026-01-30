@@ -4,6 +4,7 @@ import { lucas } from "../Context/LucasContext";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import Loader from "./loader";
 
 const Companies = () => {
   const [
@@ -13,6 +14,7 @@ const Companies = () => {
     allData,
     filteredData,
     setFilteredData,
+    loading
   ] = useContext(lucas);
 
   const [query, setQuery] = useState("");
@@ -50,7 +52,11 @@ const Companies = () => {
       ),
     );
   };
-
+if (loading) {
+  return (
+    <Loader/>
+  );
+}
   return (
     <div className="px-4 pb-10 pt-8">
       

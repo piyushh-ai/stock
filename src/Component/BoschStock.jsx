@@ -3,6 +3,7 @@ import search from "../assets/icons/search.png";
 import * as XLSX from "xlsx";
 import { useNavigate } from "react-router-dom";
 import { boschStock } from "../Context/BoschStockContext";
+import Loader from "./loader";
 
 const normalize = (str = "") =>
   str
@@ -56,9 +57,7 @@ const BoschStock = () => {
   
 if (loading) {
   return (
-    <div className="h-screen flex items-center justify-center text-lg">
-      Loading Bosch Stock...
-    </div>
+    <Loader/>
   );
 }
 

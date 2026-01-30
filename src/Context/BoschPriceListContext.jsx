@@ -15,6 +15,8 @@ export const boschPricePC = createContext();
 const BoschPriceListContext = (props) => {
   const [allData, setAllData] = useState([]);
   const [modifiedOn, setModifiedOn] = useState(null);
+    const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     let finalData = [];
@@ -56,12 +58,14 @@ const BoschPriceListContext = (props) => {
         });
       }
       setAllData(finalData);
+setLoading(false);
+
     };
     readExcel();
   }, []);
 
   return (
-    <boschPricePC.Provider value={[allData, setAllData, modifiedOn]}>
+    <boschPricePC.Provider value={[allData, setAllData, modifiedOn, loading]}>
       {props.children}
     </boschPricePC.Provider>
   );
