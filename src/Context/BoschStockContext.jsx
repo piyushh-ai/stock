@@ -11,6 +11,8 @@ const normalize = (str = "") =>
 const BoschStockContext = (props) => {
   const [modifiedOn, setModifiedOn] = useState(null);
   const [allData, setAllData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const readExcel = async () => {
@@ -54,7 +56,9 @@ const BoschStockContext = (props) => {
           });
         }
       });
-      setAllData(temp);
+     setAllData(temp);
+setLoading(false);
+
     };
 
     readExcel();
@@ -64,7 +68,7 @@ const BoschStockContext = (props) => {
     
   }, [allData]);
 
-  return <boschStock.Provider value={[allData, setAllData, modifiedOn]}>{props.children}</boschStock.Provider>;
+  return <boschStock.Provider value={[allData, setAllData, modifiedOn, loading]}>{props.children}</boschStock.Provider>;
 };
 
 export default BoschStockContext;

@@ -12,13 +12,21 @@ const normalize = (str = "") =>
     .replace(/[^a-z0-9]/g, "");
 
 const BoschStock = () => {
-  const [allData, setAllData, modifiedOn] = useContext(boschStock);
+  const [allData, setAllData, modifiedOn, loading] = useContext(boschStock);
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState("");
 
   const navigate = useNavigate();
 
-  // 📦 Excel load
+
+if (loading) {
+  return (
+    <div className="h-screen flex items-center justify-center text-lg">
+      Loading Bosch Stock...
+    </div>
+  );
+}
+
 
   console.log(allData);
 
