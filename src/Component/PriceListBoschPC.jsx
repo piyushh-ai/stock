@@ -3,6 +3,7 @@ import { boschPricePC } from "../Context/BoschPriceListContext";
 import { Link } from "react-router-dom";
 import search from "../assets/icons/search.png";
 import Loader from "./loader";
+import Loading from "./Loading";
 
 const normalize = (str = "") =>
   str
@@ -49,7 +50,7 @@ const PriceListBoschPC = () => {
 
   if (loading) {
   return (
-    <Loader/>
+   <Loading/>
   );
 }
 

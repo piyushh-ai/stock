@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import Loader from "./loader";
+import Loading from "./Loading";
 
 const CompanyStock = () => {
   const { id } = useParams();
@@ -68,7 +69,7 @@ const CompanyStock = () => {
 
   if (loading) {
   return (
-    <Loader/>
+    <Loading/>
   );
 }
 

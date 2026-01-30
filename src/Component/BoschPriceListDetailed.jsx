@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { boschPricePC } from "../Context/BoschPriceListContext";
 import { useParams } from "react-router-dom";
 import Loader from "./loader";
+import Loading from "./Loading";
 
 const BoschPriceListDetailed = () => {
   const [allData, setAllData, modifiedOn, loading] = useContext(boschPricePC);
@@ -9,7 +10,7 @@ const BoschPriceListDetailed = () => {
 
   const item = allData.find((elem) => id == elem.id);
   if (loading) {
-    return <Loader />;
+    return <Loading />;
   }
   return (
     <div className="flex flex-col mt-8 items-center justify-center py-12 bg-slate-50">

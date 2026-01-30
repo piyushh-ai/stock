@@ -3,6 +3,8 @@ import search from "../assets/icons/search.png";
 import * as XLSX from "xlsx";
 import { useNavigate } from "react-router-dom";
 import { boschStock } from "../Context/BoschStockContext";
+import Loader from "./loader";
+import Loading from "./Loading";
 
 const normalize = (str = "") =>
   str
@@ -49,7 +51,7 @@ const BoschStock = () => {
   }, [query, allData]);
 
   if (loading) {
-    return <Loader />;
+    return <Loading />;
   }
 
   return (
