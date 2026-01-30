@@ -3,7 +3,6 @@ import search from "../assets/icons/search.png";
 import * as XLSX from "xlsx";
 import { useNavigate } from "react-router-dom";
 import { boschStock } from "../Context/BoschStockContext";
-import Loader from "./loader";
 
 const normalize = (str = "") =>
   str
