@@ -18,11 +18,6 @@ const BoschStock = () => {
 
   const navigate = useNavigate();
 
-
-
-
-  
-
   // 🔍 Search
   useEffect(() => {
     if (!query.trim()) {
@@ -53,12 +48,9 @@ const BoschStock = () => {
     return () => clearTimeout(timer);
   }, [query, allData]);
 
-  
-if (loading) {
-  return (
-    <Loader/>
-  );
-}
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="px-4 pb-10 pt-8">
