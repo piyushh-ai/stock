@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 
 const Companies = () => {
-  const [
+  const {
     allSheets,
     filteredSheet,
     setFilteredSheet,
@@ -15,7 +15,7 @@ const Companies = () => {
     filteredData,
     setFilteredData,
     loading
-  ] = useContext(lucas);
+   } = useContext(lucas);
 
   const [query, setQuery] = useState("");
   const [sheetData, setSheetData] = useState(null);

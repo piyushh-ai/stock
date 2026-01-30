@@ -1,16 +1,23 @@
-import React, { createContext, useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
+import search from "../assets/icons/search.png";
 import * as XLSX from "xlsx";
+import { createContext } from "react";
+import { useParams } from "react-router-dom";
 
 export const lucas = createContext();
-
-const LucasContext = ({ children }) => {
+const LucasContext = (props) => {
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [allSheets, setAllSheets] = useState([]);
   const [filteredSheet, setFilteredSheet] = useState([]);
   const [modifiedOn, setModifiedOn] = useState(null);
-  const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
+
+
+
+  
   useEffect(() => {
     const readExcel = async () => {
       try {
@@ -76,6 +83,8 @@ const LucasContext = ({ children }) => {
     readExcel();
   }, []);
 
+  
+
   return (
     <lucas.Provider
       value={{
@@ -86,10 +95,10 @@ const LucasContext = ({ children }) => {
         filteredData,
         setFilteredData,
         modifiedOn,
-        loading,
+        loading
       }}
     >
-      {children}
+      {props.children}
     </lucas.Provider>
   );
 };

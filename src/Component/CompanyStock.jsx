@@ -10,7 +10,7 @@ const CompanyStock = () => {
   const { id } = useParams();
   const [query, setQuery] = useState("");
 
-  const [
+  const {
     allSheets,
     filteredSheet,
     setFilteredSheet,
@@ -19,7 +19,7 @@ const CompanyStock = () => {
     setFilteredData,
     modifiedOn,
     loading
-  ] = useContext(lucas);
+   } = useContext(lucas);
 
   const navigate = useNavigate();
 
