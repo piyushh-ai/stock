@@ -19,16 +19,9 @@ const BoschStock = () => {
   const navigate = useNavigate();
 
 
-if (loading) {
-  return (
-    <div className="h-screen flex items-center justify-center text-lg">
-      Loading Bosch Stock...
-    </div>
-  );
-}
 
 
-  console.log(allData);
+  
 
   // 🔍 Search
   useEffect(() => {
@@ -59,6 +52,15 @@ if (loading) {
 
     return () => clearTimeout(timer);
   }, [query, allData]);
+
+  
+if (loading) {
+  return (
+    <div className="h-screen flex items-center justify-center text-lg">
+      Loading Bosch Stock...
+    </div>
+  );
+}
 
   return (
     <div className="px-4 pb-10 pt-8">
