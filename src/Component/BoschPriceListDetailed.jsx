@@ -4,10 +4,11 @@ import { useParams } from "react-router-dom";
 import Loading from "./Loading";
 
 const BoschPriceListDetailed = () => {
-  const [allData, setAllData, modifiedOn, loading] = useContext(boschPricePC);
+  const {allData, setAllData, modifiedOn, loading}= useContext(boschPricePC);
   const { id } = useParams();
 
   const item = allData.find((elem) => id == elem.id);
+  if (!item) return <p>Item not found</p>;
   if (loading) {
     return <Loading />;
   }
